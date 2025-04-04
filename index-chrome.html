@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📍 Shortcuts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('fondo.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: rgba(76, 175, 80, 0.6);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            font-size: 20px;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .column-title {
+            background-color: rgba(76, 175, 80, 0.9);
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+            color: #00ffee;
+            box-shadow: 0px 2px 5px #fa0a2ed7;
+        }
+
+        .link {
+            padding: 15px 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+            text-align: center;
+            font-size: 14px;
+            transition: background-color 0.8s;
+            box-shadow: 0px 2px 4px rgba(10, 10, 10, 1);
+        }
+
+        .link:hover {
+            background-color: #a0a0a0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>🗂️📌 Shortcuts</h1>
+    </header>
+    <div class="container">
+        <div class="column">
+            <div class="column-title">Links Favs</div>
+            <a class="link" href="https://mail.google.com/mail/u/0/#inbox" target="_blank">Gmail</a>
+            <a class="link" href="https://drive.google.com/drive/my-drive" target="_blank">My Drive</a>
+            <a class="link" href="https://drive.google.com/drive/shared-drives" target="_blank">Drive Share</a>
+            <a class="link" href="https://mail.google.com/chat/u/0/#chat/home" target="_blank">Google Chat</a>
+            <a class="link" href="https://calendar.google.com/calendar/u/0/r" target="_blank">Calendar</a>
+            <a class="link" href="https://meet.google.com/landing?authuser=0" target="_blank">Meet</a>
+            <a class="link" href="https://meli.workplace.com/" target="_blank">Workplace</a>
+            <a class="link" href="https://meli.udemy.com/organization/home/" target="_blank">Udemy</a>
+        </div>
+        <div class="column">
+            <div class="column-title">Utils Tools</div>
+            <a class="link" href="https://drive.google.com/drive/my-drive?ths=true" target="_blank">Drive</a>
+            <a class="link" href="https://docs.google.com/document" target="_blank">Docs</a>
+            <a class="link" href="https://docs.google.com/spreadsheets" target="_blank">Sheets</a>
+            <a class="link" href="https://docs.google.com/presentation" target="_blank">Presentation</a>
+            <a class="link" href="https://app.diagrams.net" target="_blank">Draw.io</a>
+            <a class="link" href="https://mercadolibre.atlassian.net/jira/software/c/projects/SGP1/list"
+                target="_blank">Jira</a>
+            <a class="link" href="https://excalidraw.com" target="_blank">Excalidraw</a>
+            <a class="link" href="https://mordor.adminml.com/profile" target="_blank">Mordor</a>
+            <a class="link" href="https://melihelp.adminml.com/board" target="_blank">Meli Help</a>
+        </div>
+        <div class="column">
+            <div class="column-title">Kraken Tools</div>
+            <a class="link" href="https://envios.adminml.com/tools/auth/users" target="_blank">Users</a>
+            <a class="link" href="https://xtools.adminml.com/management/roles?section=my-roles"
+                target="_blank">Roles</a>
+            <a class="link" href="https://xtools.adminml.com/management/applications" target="_blank">Apps</a>
+            <a class="link" href="https://xtools.adminml.com/management/domains?section=my-domains"
+                target="_blank">Domains</a>
+            <a class="link" href="https://envios.adminml.com/tools/rules/permission-incompatibilities"
+                target="_blank">Incomp Permisos</a>
+             <a class="link" href="https://envios.adminml.com/tools/events?eventCollections=kraken-authorization&page=1" 
+                target="_blank">Tantor</a>
+        </div>
+        <div class="column">
+            <div class="column-title">Alfred Tools</div>
+            <a class="link" href="https://envios.adminml.com/tools/alfred/configurations" target="_blank">Alfred
+                Configs</a>
+            <a class="link" href="https://envios.adminml.com/tools/alfred/flows" target="_blank">Alfred Flows</a>
+            <a class="link" href="https://envios.adminml.com/tools/alfred/tickets" target="_blank">Alfred Tickets</a>
+        </div>
+        <div class="column">
+            <div class="column-title">Fury Apps</div>
+            <a class="link" href="https://web.furycloud.io/workspace?show=applications" target="_blank">Fury Apps</a>
+            <a class="link" href="https://web.furycloud.io/kraken-auth-core-api/infrastructure"
+                target="_blank">auth-core-api</a>
+            <a class="link" href="https://web.furycloud.io/kraken-auth-admin-api/infrastructure"
+                target="_blank">auth-admin-api</a>
+            <a class="link" href="https://web.furycloud.io/kraken-application-mgmt-api/infrastructure"
+                target="_blank">application-mgmt-api</a>
+            <a class="link" href="https://web.furycloud.io/kraken-authenticated-users-api/infrastructure"
+                target="_blank">authenticated-users-api</a>
+            <a class="link" href="https://web.furycloud.io/kraken-menu-management-api/infrastructure" 
+                target="_blank">menu-management-api</a>
+            <a class="link" href="https://web.furycloud.io/kraken-audiences-api/infrastructure"
+                target="_blank">audiences-api</a>
+        </div>
+        <div class="column">
+            <div class="column-title">Fury Apps</div>
+            <a class="link" href="https://web.furycloud.io/kraken-attributes-api-v2/infrastructure"
+                target="_blank">attributes-api-v2</a>
+            <a class="link" href="https://web.furycloud.io/kraken-role-management-api/infrastructure"
+                target="_blank">role-management-api</a>
+            <a class="link" href="https://web.furycloud.io/kraken-self-management-api/infrastructure"
+                target="_blank">self-management-api</a>
+            <a class="link" href="https://web.furycloud.io/shipping-users-mgmt-api/infrastructure"
+                target="_blank">shipping-users-mgmt-api</a>
+            <a class="link" href="https://web.furycloud.io/kraken-user-managment-api/infrastructure"
+                target="_blank">user-managment-api</a>
+            <a class="link" href="https://web.furycloud.io/kraken-menu-api/infrastructure" 
+            target="_blank">menu-api</a>
+        </div>
+    </div>
+</body>
+</html>
