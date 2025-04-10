@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>4 páginas en 1</title>
+  <style>
+    body, html {
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #ccc;
+      resize: both;
+      overflow: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <iframe src="https://web.furycloud.io/kraken-auth-core-api/infrastructure" title="Página 1"></iframe>
+    <iframe src="https://web.furycloud.io/kraken-role-management-api/infrastructure" title="Página 2"></iframe>
+    <iframe src="https://web.furycloud.io/kraken-auth-admin-api/infrastructure" title="Página 3"></iframe>
+    <iframe src="https://web.furycloud.io/kraken-menu-api/infrastructure" title="Página 4"></iframe>
+  </div>
+</body>
+</html>
