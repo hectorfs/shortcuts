@@ -38,7 +38,7 @@
       position:sticky; top:0; z-index:10;
     }
     header .bar{
-      max-width:1100px; margin:0 auto; display:flex; align-items:center; gap:12px;
+      max-width:1400px; margin:0 auto; display:flex; align-items:center; gap:12px;
     }
     header h1{
       font-size:20px; margin:0; flex:1;
@@ -68,29 +68,47 @@
     .panel{ display:none; padding:20px; width:100%; }
     .panel.active{ display:block; }
 
+    /* --- AJUSTES IMPORTANTES PARA MÁS COLUMNAS --- */
     .container{
-      display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:10px;
-      max-width:1100px; margin:0 auto;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:16px;                 /* espacio entre columnas */
+      padding:10px;
+      max-width:1400px;         /* mayor ancho para mostrar más columnas */
+      margin:0 auto;
     }
-    .column{ display:flex; flex-direction:column; gap:15px; min-width:260px; }
+    .column{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      /* permite que haya más columnas en la fila: base de 200px */
+      flex: 1 1 200px;
+      min-width:200px;
+      max-width: 1fr;
+    }
     .column-title{
       background-color:var(--pri);
       font-size:14px; font-weight:bold; text-align:center; margin-bottom:8px;
       color:var(--pill); box-shadow:0 2px 5px var(--glow); padding:8px 10px; border-radius:6px;
     }
     .link{
-      padding:15px 20px; background-color:var(--card-bg); border:1px solid var(--card-bd);
-      border-radius:5px; text-decoration:none; color:var(--ink); text-align:center; font-size:14px;
+      padding:12px 14px; background-color:var(--card-bg); border:1px solid var(--card-bd);
+      border-radius:5px; text-decoration:none; color:var(--ink); text-align:center; font-size:13px;
       transition: background-color .2s ease, transform .06s ease;
       box-shadow:0px 2px 4px rgba(10,10,10,1);
     }
     .link:hover{ background-color:#a0a0a0; color:#111; transform:translateY(-1px); }
 
-    /* Responsivo */
+    /* Responsivo: en pantallas pequeñas las columnas ocupan 100% */
+    @media (max-width:1100px){
+      header .bar{ max-width:1000px; }
+      .container{ gap:14px; }
+    }
     @media (max-width:720px){
       .tabs{ gap:4px; }
       .tab-btn{ font-size:12px; padding:7px 10px; }
-      .column{ min-width:min(100%, 500px); }
+      .column{ min-width:100%; flex: 1 1 100%; }
     }
   </style>
 </head>
@@ -128,6 +146,7 @@
         <a class="link" href="https://meli.udemy.com/organization/home/" target="_blank">Udemy</a>
         <a class="link" href="https://nasdaq-meli.app.opsgenie.com/alert/list" target="_blank">Opsgenie</a>
       </div>
+
       <div class="column">
         <div class="column-title">Utils Tools</div>
         <a class="link" href="https://drive.google.com/drive/my-drive?ths=true" target="_blank">Drive</a>
@@ -140,6 +159,7 @@
         <a class="link" href="https://mordor.adminml.com/profile" target="_blank">Mordor</a>
         <a class="link" href="https://melihelp.adminml.com/board" target="_blank">Meli Help</a>
       </div>
+
       <div class="column">
         <div class="column-title">Kraken Tools</div>
         <a class="link" href="https://envios.adminml.com/tools/auth/users" target="_blank">Users</a>
@@ -152,6 +172,7 @@
         <a class="link" href="https://envios.adminml.com/tools/rules/permission-incompatibilities" target="_blank">Incomp Permisos</a>
         <a class="link" href="https://envios.adminml.com/tools/events?eventCollections=kraken-authorization&page=1" target="_blank">Tantor</a>
       </div>
+
       <div class="column">
         <div class="column-title">Alfred Tools</div>
         <a class="link" href="https://envios.adminml.com/tools/alfred/configurations" target="_blank">Alfred Configs</a>
@@ -164,6 +185,7 @@
         <a class="link" href="https://meli-gpt.adminml.com" target="_blank">MELI GPT</a>
         <a class="link" href="https://chatgpt.com" target="_blank">Chat GPT</a>
       </div>
+
       <div class="column">
         <div class="column-title">Fury Apps</div>
         <a class="link" href="https://web.furycloud.io/workspace?show=applications" target="_blank">Fury Apps</a>
@@ -173,6 +195,7 @@
         <a class="link" href="https://web.furycloud.io/kraken-self-management-api/infrastructure" target="_blank">self-management-api</a>
         <a class="link" href="https://web.furycloud.io/shipping-users-mgmt-api/infrastructure" target="_blank">shipping-users-mgmt-api</a>
       </div>
+
       <div class="column">
         <div class="column-title">Fury Apps</div>
         <a class="link" href="https://web.furycloud.io/kraken-auth-core-api/infrastructure" target="_blank">auth-core-api</a>
@@ -191,22 +214,19 @@
     <div class="container">
       <div class="column">
         <div class="column-title">Fury Apps</div>
-        <a class="link" href="https://web.furycloud.io/workspace?show=applications" target="_blank">Fury Apps</a>
-        <a class="link" href="https://web.furycloud.io/kraken-authenticated-users-api/infrastructure" target="_blank">authenticated-users-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-audiences-api/infrastructure" target="_blank">audiences-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-attributes-api-v2/infrastructure" target="_blank">attributes-api-v2</a>
-        <a class="link" href="https://web.furycloud.io/kraken-self-management-api/infrastructure" target="_blank">self-management-api</a>
-        <a class="link" href="https://web.furycloud.io/shipping-users-mgmt-api/infrastructure" target="_blank">shipping-users-mgmt-api</a>
+        <a class="link" href="#" target="_blank">Repo 1</a>
+        <a class="link" href="#" target="_blank">Repo 2</a>
+        <a class="link" href="#" target="_blank">Repo 3</a>
+        <a class="link" href="#" target="_blank">Repo 4</a>
+        <a class="link" href="#" target="_blank">Repo 5</a>
       </div>
       <div class="column">
         <div class="column-title">Fury Apps</div>
-        <a class="link" href="https://web.furycloud.io/kraken-auth-core-api/infrastructure" target="_blank">auth-core-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-auth-admin-api/infrastructure" target="_blank">auth-admin-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-application-mgmt-api/infrastructure" target="_blank">application-mgmt-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-role-management-api/infrastructure" target="_blank">role-management-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-user-managment-api/infrastructure" target="_blank">user-managment-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-menu-management-api/infrastructure" target="_blank">menu-management-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-menu-api/infrastructure" target="_blank">menu-api</a>
+        <a class="link" href="#" target="_blank">Repo 6</a>
+        <a class="link" href="#" target="_blank">Repo 7</a>
+        <a class="link" href="#" target="_blank">Repo 8</a>
+        <a class="link" href="#" target="_blank">Repo 9</a>
+        <a class="link" href="#" target="_blank">Repo 10</a>
       </div>
     </div>
   </section>
@@ -216,22 +236,15 @@
     <div class="container">
       <div class="column">
         <div class="column-title">Fury Apps</div>
-        <a class="link" href="https://web.furycloud.io/workspace?show=applications" target="_blank">Fury Apps</a>
-        <a class="link" href="https://web.furycloud.io/kraken-authenticated-users-api/infrastructure" target="_blank">authenticated-users-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-audiences-api/infrastructure" target="_blank">audiences-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-attributes-api-v2/infrastructure" target="_blank">attributes-api-v2</a>
-        <a class="link" href="https://web.furycloud.io/kraken-self-management-api/infrastructure" target="_blank">self-management-api</a>
-        <a class="link" href="https://web.furycloud.io/shipping-users-mgmt-api/infrastructure" target="_blank">shipping-users-mgmt-api</a>
+        <a class="link" href="#" target="_blank">Deploy 1</a>
+        <a class="link" href="#" target="_blank">Deploy 2</a>
+        <a class="link" href="#" target="_blank">Deploy 3</a>
       </div>
       <div class="column">
         <div class="column-title">Fury Apps</div>
-        <a class="link" href="https://web.furycloud.io/kraken-auth-core-api/infrastructure" target="_blank">auth-core-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-auth-admin-api/infrastructure" target="_blank">auth-admin-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-application-mgmt-api/infrastructure" target="_blank">application-mgmt-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-role-management-api/infrastructure" target="_blank">role-management-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-user-managment-api/infrastructure" target="_blank">user-managment-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-menu-management-api/infrastructure" target="_blank">menu-management-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-menu-api/infrastructure" target="_blank">menu-api</a>
+        <a class="link" href="#" target="_blank">Deploy 4</a>
+        <a class="link" href="#" target="_blank">Deploy 5</a>
+        <a class="link" href="#" target="_blank">Deploy 6</a>
       </div>
     </div>
   </section>
