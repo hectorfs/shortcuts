@@ -49,7 +49,12 @@
       box-shadow:0 2px 4px rgba(0,0,0,.15), 0 0 0 1px rgba(0,0,0,.06) inset;
       transition:transform .06s ease, background-color .18s ease;
       display:flex; align-items:center; gap:.5rem;
+      /* evitar que el label del tab haga wrap */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
+    .tab-btn span{ white-space: nowrap; } /* label no-wrap */
     .tab-btn:hover{ transform:translateY(-1px); background:#fff; }
     .tab-btn[aria-selected="true"]{
       background:var(--pri); color:var(--pill); box-shadow:0 2px 6px var(--glow);
@@ -75,12 +80,19 @@
       min-width: var(--col-min);
       max-width: calc(var(--col-min) * 1.2);
     }
+
+    /* evitar wrap en títulos de columna y truncar con ... */
     .column-title{
       background-color:var(--pri);
       font-size:15px; font-weight:700; text-align:center;
       color:var(--pill); box-shadow:0 2px 5px var(--glow);
       padding:9px 11px; border-radius:6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
+
+    /* links en una sola línea; si son largos, se muestran con "..." */
     .link{
       padding:11px 13px;
       background:var(--card-bg);
@@ -92,6 +104,11 @@
       font-size:14px;
       transition: background-color .16s ease, transform .06s ease;
       box-shadow:0 1px 3px rgba(10,10,10,.9);
+
+      display:block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .link:hover{ background-color:#a0a0a0; color:#111; transform:translateY(-2px); }
 
@@ -106,6 +123,9 @@
       .tabs{ gap:6px; }
       .tab-btn{ font-size:13px; padding:8px 10px; }
       .column{ flex: 1 1 100%; min-width:100%; max-width:100%; }
+      /* en móvil permitimos que el título de columna use dos líneas si hace falta (mejor UX) */
+      .column-title{ white-space: normal; }
+      .tab-btn{ white-space: nowrap; } /* tabs siempre no-wrap */
     }
   </style>
 </head>
@@ -114,13 +134,13 @@
     <div class="bar">
       <h1>🔗 Shortcuts 🔗</h1>
       <div class="tabs" role="tablist" aria-label="Secciones">
-        <button class="tab-btn" role="tab" aria-selected="true" aria-controls="panel-links" id="tab-links">
+        <button class="tab-btn" role="tab" aria-selected="true" aria-controls="panel-links" id="tab-links" title="Links">
           <span aria-hidden="true">🔗</span><span>Links</span>
         </button>
-        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-github" id="tab-github">
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-github" id="tab-github" title="GitHub">
           <span aria-hidden="true">🐙</span><span>GitHub</span>
         </button>
-        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-deploys" id="tab-deploys">
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-deploys" id="tab-deploys" title="Deploys">
           <span aria-hidden="true">🚀</span><span>Deploys</span>
         </button>
       </div>
@@ -275,7 +295,27 @@
 
     // Restaurar desde localStorage (si existe) o por defecto 'links'
     const last = localStorage.getItem(STORAGE_KEY) || 'links';
-    window.addEventListener('DOMContentLoaded', ()=> activate(last, false) );
+
+    // DOM ready
+    window.addEventListener('DOMContentLoaded', ()=> {
+      // activar último tab
+      activate(last, false);
+
+      // setear title en links y column-titles para mostrar texto completo en hover
+      document.querySelectorAll('.link').forEach(a=>{
+        if(!a.title) a.title = a.textContent.trim();
+      });
+      document.querySelectorAll('.column-title').forEach(el=>{
+        if(!el.title) el.title = el.textContent.trim();
+      });
+      // también title en tabs (por si el label se trunca)
+      document.querySelectorAll('.tab-btn').forEach(btn=>{
+        if(!btn.title) {
+          const txt = [...btn.querySelectorAll('span')].map(s=>s.textContent.trim()).join(' ');
+          btn.title = txt;
+        }
+      });
+    });
 
     tabs.forEach(btn=>{
       btn.addEventListener('click', ()=>{
