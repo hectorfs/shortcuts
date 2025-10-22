@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Shortcuts</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔗</text></svg>">
   <style>
@@ -14,261 +15,249 @@
       --glow: #fa0a2ed7;
       --card-bg:#fff;
       --card-bd:#ddd;
-      --max-w:1600px;
-      --col-min:170px;
-      --gap:12px;
     }
 
     *{box-sizing:border-box}
     body{
       font-family: Arial, sans-serif;
-      margin:0; padding:0;
+      margin:0;
+      padding:0;
       background:url('fondo.jpg') no-repeat center center fixed;
       background-size:cover;
       min-height:100vh;
-      display:flex; flex-direction:column;
+      display:flex;
+      flex-direction:column;
     }
 
     header{
-      background-color:var(--pri-soft);
-      color:#fff; padding:10px; width:100%;
+      background-color: var(--pri-soft);
+      color:#fff;
+      padding:10px;
+      width:100%;
       box-shadow:0 2px 5px rgba(0,0,0,.2);
       position:sticky; top:0; z-index:10;
     }
     header .bar{
-      max-width:var(--max-w); margin:0 auto; display:flex; align-items:center; gap:12px;
+      max-width:1400px; margin:0 auto; display:flex; align-items:center; gap:12px;
     }
-    header h1{ font-size:21px; margin:0; flex:1; text-shadow:0 1px 0 rgba(0,0,0,.25); }
+    header h1{
+      font-size:20px; margin:0; flex:1;
+      text-shadow:0 1px 0 rgba(0,0,0,.25);
+    }
 
-    /* TABS (más clickeables: padding aumentado) */
-    .tabs{ display:flex; gap:8px; justify-content:flex-end; align-items:center; }
+    /* TABS (alineados a la derecha) */
+    .tabs{
+      display:flex; gap:6px; justify-content:flex-end; align-items:center;
+    }
     .tab-btn{
       appearance:none; border:0; cursor:pointer;
-      padding:10px 16px; border-radius:999px; /* +1px vertical, +1px horizontal */
-      background:#ffffffd9; color:#0b0b0b; font-weight:600; font-size:14px;
-      box-shadow:0 2px 4px rgba(0,0,0,.15), 0 0 0 1px rgba(0,0,0,.06) inset;
-      transition:transform .06s ease, background-color .18s ease;
+      padding:8px 14px; border-radius:999px;
+      background:#ffffffd9; color:#0b0b0b; font-weight:600; font-size:13px;
+      box-shadow:0 2px 4px rgba(0,0,0,.2), 0 0 0 1px rgba(0,0,0,.08) inset;
+      transition:transform .06s ease, background-color .2s ease;
       display:flex; align-items:center; gap:.5rem;
-      /* ahora permitimos wrap natural si hiciera falta (no más ellipsis) */
     }
     .tab-btn:hover{ transform:translateY(-1px); background:#fff; }
     .tab-btn[aria-selected="true"]{
-      background:var(--pri); color:var(--pill); box-shadow:0 2px 6px var(--glow);
+      background:var(--pri);
+      color:var(--pill);
+      box-shadow:0 2px 5px var(--glow);
     }
 
-    /* Panels */
-    .panel{ display:none; padding:18px 10px; width:100%; }
+    /* Layout columnas / tarjetas */
+    .panel{ display:none; padding:20px; width:100%; }
     .panel.active{ display:block; }
 
-    /* Contenedor y columnas (centradas y compactas) */
+    /* --- AJUSTES IMPORTANTES PARA MÁS COLUMNAS --- */
     .container{
       display:flex;
       flex-wrap:wrap;
-      gap:var(--gap);
-      padding:12px;
-      max-width:var(--max-w);
-      margin:0 auto;
       justify-content:center;
+      gap:16px;                 /* espacio entre columnas */
+      padding:10px;
+      max-width:1400px;         /* mayor ancho para mostrar más columnas */
+      margin:0 auto;
     }
     .column{
-      display:flex; flex-direction:column; gap:10px;
-      flex: 0 1 var(--col-min); /* no grow: evita estirar si hay pocas columnas */
-      min-width: var(--col-min);
-      max-width: calc(var(--col-min) * 1.2);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      /* permite que haya más columnas en la fila: base de 200px */
+      flex: 1 1 200px;
+      min-width:200px;
+      max-width: 1fr;
     }
     .column-title{
       background-color:var(--pri);
-      font-size:15px; font-weight:700; text-align:center;
-      color:var(--pill); box-shadow:0 2px 5px var(--glow);
-      padding:9px 11px; border-radius:6px;
-      /* permitimos varias líneas si hace falta, pero con el padding aumentado queda legible */
-      white-space: normal;
+      font-size:14px; font-weight:bold; text-align:center; margin-bottom:8px;
+      color:var(--pill); box-shadow:0 2px 5px var(--glow); padding:8px 10px; border-radius:6px;
     }
     .link{
-      padding:13px 15px; /* aumentado para mejor clic */
-      background:var(--card-bg);
-      border:1px solid var(--card-bd);
-      border-radius:6px;
-      text-decoration:none;
-      color:var(--ink);
-      text-align:center;
-      font-size:15px; /* +1px respecto a la versión anterior */
-      transition: background-color .16s ease, transform .06s ease;
-      box-shadow:0 1px 3px rgba(10,10,10,.9);
-      display:block;
-      /* permitimos wrap en caso de que el texto sea largo, para evitar recorte */
-      white-space: normal;
-      word-break: break-word;
+      padding:12px 14px; background-color:var(--card-bg); border:1px solid var(--card-bd);
+      border-radius:5px; text-decoration:none; color:var(--ink); text-align:center; font-size:13px;
+      transition: background-color .2s ease, transform .06s ease;
+      box-shadow:0px 2px 4px rgba(10,10,10,1);
     }
-    .link:hover{ background-color:#a0a0a0; color:#111; transform:translateY(-2px); }
+    .link:hover{ background-color:#a0a0a0; color:#111; transform:translateY(-1px); }
 
-    /* Responsive */
-    @media (max-width:1200px){
-      header .bar{ max-width:1100px; }
-    }
-    @media (max-width:900px){
-      .column{ flex: 0 1 200px; min-width:200px; max-width: 260px; }
+    /* Responsivo: en pantallas pequeñas las columnas ocupan 100% */
+    @media (max-width:1100px){
+      header .bar{ max-width:1000px; }
+      .container{ gap:14px; }
     }
     @media (max-width:720px){
-      .tabs{ gap:6px; }
-      .tab-btn{ font-size:13px; padding:9px 12px; }
-      .column{ flex: 1 1 100%; min-width:100%; max-width:100%; }
+      .tabs{ gap:4px; }
+      .tab-btn{ font-size:12px; padding:7px 10px; }
+      .column{ min-width:100%; flex: 1 1 100%; }
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="bar">
       <h1>🔗 Shortcuts 🔗</h1>
       <div class="tabs" role="tablist" aria-label="Secciones">
-        <button class="tab-btn" role="tab" aria-selected="true" aria-controls="panel-links" id="tab-links" title="Links">
+        <button class="tab-btn" role="tab" aria-selected="true" aria-controls="panel-links" id="tab-links">
           <span aria-hidden="true">🔗</span><span>Links</span>
         </button>
-        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-github" id="tab-github" title="GitHub">
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-github" id="tab-github">
           <span aria-hidden="true">🐙</span><span>GitHub</span>
         </button>
-        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-deploys" id="tab-deploys" title="Deploys">
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-deploys" id="tab-deploys">
           <span aria-hidden="true">🚀</span><span>Deploys</span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- PANEL: LINKS (contenido intacto) -->
   <main id="panel-links" class="panel active" role="tabpanel" aria-labelledby="tab-links">
     <div class="container">
       <div class="column">
         <div class="column-title">Links Favs</div>
-        <a class="link" href="https://mail.google.com/mail/u/0/#inbox" target="_blank" rel="noopener noreferrer">Gmail</a>
-        <a class="link" href="https://drive.google.com/drive/my-drive" target="_blank" rel="noopener noreferrer">My Drive</a>
-        <a class="link" href="https://drive.google.com/drive/shared-drives" target="_blank" rel="noopener noreferrer">Drive Share</a>
-        <a class="link" href="https://mail.google.com/chat/u/0/#chat/home" target="_blank" rel="noopener noreferrer">Google Chat</a>
-        <a class="link" href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noopener noreferrer">Calendar</a>
-        <a class="link" href="https://meet.google.com/landing?authuser=0" target="_blank" rel="noopener noreferrer">Meet</a>
-        <a class="link" href="https://meli.workplace.com/" target="_blank" rel="noopener noreferrer">Workplace</a>
-        <a class="link" href="https://meli.udemy.com/organization/home/" target="_blank" rel="noopener noreferrer">Udemy</a>
-        <a class="link" href="https://nasdaq-meli.app.opsgenie.com/alert/list" target="_blank" rel="noopener noreferrer">Opsgenie</a>
+        <a class="link" href="https://mail.google.com/mail/u/0/#inbox" target="_blank">Gmail</a>
+        <a class="link" href="https://drive.google.com/drive/my-drive" target="_blank">My Drive</a>
+        <a class="link" href="https://drive.google.com/drive/shared-drives" target="_blank">Drive Share</a>
+        <a class="link" href="https://mail.google.com/chat/u/0/#chat/home" target="_blank">Google Chat</a>
+        <a class="link" href="https://calendar.google.com/calendar/u/0/r" target="_blank">Calendar</a>
+        <a class="link" href="https://meet.google.com/landing?authuser=0" target="_blank">Meet</a>
+        <a class="link" href="https://meli.workplace.com/" target="_blank">Workplace</a>
+        <a class="link" href="https://meli.udemy.com/organization/home/" target="_blank">Udemy</a>
+        <a class="link" href="https://nasdaq-meli.app.opsgenie.com/alert/list" target="_blank">Opsgenie</a>
       </div>
 
       <div class="column">
         <div class="column-title">Utils Tools</div>
-        <a class="link" href="https://drive.google.com/drive/my-drive?ths=true" target="_blank" rel="noopener noreferrer">Drive</a>
-        <a class="link" href="https://docs.google.com/document" target="_blank" rel="noopener noreferrer">Docs</a>
-        <a class="link" href="https://docs.google.com/spreadsheets" target="_blank" rel="noopener noreferrer">Sheets</a>
-        <a class="link" href="https://docs.google.com/presentation" target="_blank" rel="noopener noreferrer">Presentation</a>
-        <a class="link" href="https://app.diagrams.net" target="_blank" rel="noopener noreferrer">Draw.io</a>
-        <a class="link" href="https://mercadolibre.atlassian.net/jira/software/c/projects/SGP1/boards/6528/backlog" target="_blank" rel="noopener noreferrer">Jira : Backlog</a>
-        <a class="link" href="https://excalidraw.com" target="_blank" rel="noopener noreferrer">Excalidraw</a>
-        <a class="link" href="https://mordor.adminml.com/profile" target="_blank" rel="noopener noreferrer">Mordor</a>
-        <a class="link" href="https://melihelp.adminml.com/board" target="_blank" rel="noopener noreferrer">Meli Help</a>
+        <a class="link" href="https://drive.google.com/drive/my-drive?ths=true" target="_blank">Drive</a>
+        <a class="link" href="https://docs.google.com/document" target="_blank">Docs</a>
+        <a class="link" href="https://docs.google.com/spreadsheets" target="_blank">Sheets</a>
+        <a class="link" href="https://docs.google.com/presentation" target="_blank">Presentation</a>
+        <a class="link" href="https://app.diagrams.net" target="_blank">Draw.io</a>
+        <a class="link" href="https://mercadolibre.atlassian.net/jira/software/c/projects/SGP1/boards/6528/backlog" target="_blank">Jira : Backlog</a>
+        <a class="link" href="https://excalidraw.com" target="_blank">Excalidraw</a>
+        <a class="link" href="https://mordor.adminml.com/profile" target="_blank">Mordor</a>
+        <a class="link" href="https://melihelp.adminml.com/board" target="_blank">Meli Help</a>
       </div>
 
       <div class="column">
         <div class="column-title">Kraken Tools</div>
-        <a class="link" href="https://envios.adminml.com/tools/auth/users" target="_blank" rel="noopener noreferrer">Users</a>
-        <a class="link" href="https://xtools.adminml.com/management/roles?section=my-roles" target="_blank" rel="noopener noreferrer">Roles</a>
-        <a class="link" href="https://xtools.adminml.com/management/applications" target="_blank" rel="noopener noreferrer">Apps</a>
-        <a class="link" href="https://xtools.adminml.com/management/domains?section=my-domains" target="_blank" rel="noopener noreferrer">Domains</a>
-        <a class="link" href="http://xtools.adminml.com/tools/auth/silos" target="_blank" rel="noopener noreferrer">Silos</a>
-        <a class="link" href="https://xtools.adminml.com/management/attributes" target="_blank" rel="noopener noreferrer">Atributos</a>
-        <a class="link" href="https://xtools.adminml.com/management/roles/biso-pane" target="_blank" rel="noopener noreferrer">BISO Pane</a>
-        <a class="link" href="https://envios.adminml.com/tools/rules/permission-incompatibilities" target="_blank" rel="noopener noreferrer">Incomp Permisos</a>
-        <a class="link" href="https://envios.adminml.com/tools/events?eventCollections=kraken-authorization&page=1" target="_blank" rel="noopener noreferrer">Tantor</a>
+        <a class="link" href="https://envios.adminml.com/tools/auth/users" target="_blank">Users</a>
+        <a class="link" href="https://xtools.adminml.com/management/roles?section=my-roles" target="_blank">Roles</a>
+        <a class="link" href="https://xtools.adminml.com/management/applications" target="_blank">Apps</a>
+        <a class="link" href="https://xtools.adminml.com/management/domains?section=my-domains" target="_blank">Domains</a>
+        <a class="link" href="http://xtools.adminml.com/tools/auth/silos" target="_blank">Silos</a>
+        <a class="link" href="https://xtools.adminml.com/management/attributes" target="_blank">Atributos</a>
+        <a class="link" href="https://xtools.adminml.com/management/roles/biso-pane" target="_blank">BISO Pane</a>
+        <a class="link" href="https://envios.adminml.com/tools/rules/permission-incompatibilities" target="_blank">Incomp Permisos</a>
+        <a class="link" href="https://envios.adminml.com/tools/events?eventCollections=kraken-authorization&page=1" target="_blank">Tantor</a>
       </div>
 
       <div class="column">
         <div class="column-title">Alfred Tools</div>
-        <a class="link" href="https://envios.adminml.com/tools/alfred/configurations" target="_blank" rel="noopener noreferrer">Alfred Configs</a>
-        <a class="link" href="https://envios.adminml.com/tools/alfred/flows" target="_blank" rel="noopener noreferrer">Alfred Flows</a>
-        <a class="link" href="https://envios.adminml.com/tools/alfred/tickets" target="_blank" rel="noopener noreferrer">Alfred Tickets</a>
+        <a class="link" href="https://envios.adminml.com/tools/alfred/configurations" target="_blank">Alfred Configs</a>
+        <a class="link" href="https://envios.adminml.com/tools/alfred/flows" target="_blank">Alfred Flows</a>
+        <a class="link" href="https://envios.adminml.com/tools/alfred/tickets" target="_blank">Alfred Tickets</a>
         <div class="column-title">Big Query & DME</div>
-        <a class="link" href="https://console.cloud.google.com/bigquery?project=meli-bi-data&d=SHIPPING_BI" target="_blank" rel="noopener noreferrer">BigQuery Console</a>
-        <a class="link" href="https://datasuite.adminml.com/data-flow" target="_blank" rel="noopener noreferrer">Data Suite DME</a>
+        <a class="link" href="https://console.cloud.google.com/bigquery?project=meli-bi-data&d=SHIPPING_BI" target="_blank">BigQuery Console</a>
+        <a class="link" href="https://datasuite.adminml.com/data-flow" target="_blank">Data Suite DME</a>
         <div class="column-title">IA</div>
-        <a class="link" href="https://meli-gpt.adminml.com" target="_blank" rel="noopener noreferrer">MELI GPT</a>
-        <a class="link" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer">Chat GPT</a>
+        <a class="link" href="https://meli-gpt.adminml.com" target="_blank">MELI GPT</a>
+        <a class="link" href="https://chatgpt.com" target="_blank">Chat GPT</a>
       </div>
 
       <div class="column">
         <div class="column-title">Fury Apps</div>
-        <a class="link" href="https://web.furycloud.io/workspace?show=applications" target="_blank" rel="noopener noreferrer">Fury Apps</a>
-        <a class="link" href="https://web.furycloud.io/kraken-authenticated-users-api/infrastructure" target="_blank" rel="noopener noreferrer">authenticated-users-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-audiences-api/infrastructure" target="_blank" rel="noopener noreferrer">audiences-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-attributes-api-v2/infrastructure" target="_blank" rel="noopener noreferrer">attributes-api-v2</a>
-        <a class="link" href="https://web.furycloud.io/kraken-self-management-api/infrastructure" target="_blank" rel="noopener noreferrer">self-management-api</a>
-        <a class="link" href="https://web.furycloud.io/shipping-users-mgmt-api/infrastructure" target="_blank" rel="noopener noreferrer">shipping-users-mgmt-api</a>
+        <a class="link" href="https://web.furycloud.io/workspace?show=applications" target="_blank">Fury Apps</a>
+        <a class="link" href="https://web.furycloud.io/kraken-authenticated-users-api/infrastructure" target="_blank">authenticated-users-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-audiences-api/infrastructure" target="_blank">audiences-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-attributes-api-v2/infrastructure" target="_blank">attributes-api-v2</a>
+        <a class="link" href="https://web.furycloud.io/kraken-self-management-api/infrastructure" target="_blank">self-management-api</a>
+        <a class="link" href="https://web.furycloud.io/shipping-users-mgmt-api/infrastructure" target="_blank">shipping-users-mgmt-api</a>
       </div>
 
       <div class="column">
         <div class="column-title">Fury Apps</div>
-        <a class="link" href="https://web.furycloud.io/kraken-auth-core-api/infrastructure" target="_blank" rel="noopener noreferrer">auth-core-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-auth-admin-api/infrastructure" target="_blank" rel="noopener noreferrer">auth-admin-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-application-mgmt-api/infrastructure" target="_blank" rel="noopener noreferrer">application-mgmt-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-role-management-api/infrastructure" target="_blank" rel="noopener noreferrer">role-management-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-user-managment-api/infrastructure" target="_blank" rel="noopener noreferrer">user-managment-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-menu-management-api/infrastructure" target="_blank" rel="noopener noreferrer">menu-management-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-menu-api/infrastructure" target="_blank" rel="noopener noreferrer">menu-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-auth-core-api/infrastructure" target="_blank">auth-core-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-auth-admin-api/infrastructure" target="_blank">auth-admin-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-application-mgmt-api/infrastructure" target="_blank">application-mgmt-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-role-management-api/infrastructure" target="_blank">role-management-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-user-managment-api/infrastructure" target="_blank">user-managment-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-menu-management-api/infrastructure" target="_blank">menu-management-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-menu-api/infrastructure" target="_blank">menu-api</a>
       </div>
     </div>
   </main>
-
-  <!-- PANEL: GITHUB -->
   <section id="panel-github" class="panel" role="tabpanel" aria-labelledby="tab-github">
     <div class="container">
       <div class="column">
         <div class="column-title">Fury Apps GitHub</div>
-        <a class="link" href="https://github.com/melisource/fury_kraken-authenticated-users-api" target="_blank" rel="noopener noreferrer">authenticated-users-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-audiences-api" target="_blank" rel="noopener noreferrer">audiences-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-attributes-api-v2" target="_blank" rel="noopener noreferrer">attributes-api-v2</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-self-management-api" target="_blank" rel="noopener noreferrer">self-management-api</a>
-        <a class="link" href="https://github.com/melisource/fury_shipping-users-mgmt-api" target="_blank" rel="noopener noreferrer">shipping-users-mgmt-api</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-authenticated-users-api" target="_blank">authenticated-users-api</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-audiences-api" target="_blank">audiences-api</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-attributes-api-v2" target="_blank">attributes-api-v2</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-self-management-api" target="_blank">self-management-api</a>
+        <a class="link" href="https://github.com/melisource/fury_shipping-users-mgmt-api" target="_blank">shipping-users-mgmt-api</a>
       </div>
-
       <div class="column">
         <div class="column-title">Fury Apps GitHub</div>
-        <a class="link" href="https://github.com/melisource/fury_kraken-auth-core-api" target="_blank" rel="noopener noreferrer">auth-core-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-auth-admin-api" target="_blank" rel="noopener noreferrer">auth-admin-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-application-mgmt-api" target="_blank" rel="noopener noreferrer">application-mgmt-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-role-management-api" target="_blank" rel="noopener noreferrer">role-management-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-user-managment-api" target="_blank" rel="noopener noreferrer">user-managment-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-menu-management-api" target="_blank" rel="noopener noreferrer">menu-management-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-menu-api" target="_blank" rel="noopener noreferrer">menu-api</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-auth-core-api" target="_blank">auth-core-api</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-auth-admin-api" target="_blank">auth-admin-api</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-application-mgmt-api" target="_blank">application-mgmt-api</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-role-management-api" target="_blank">role-management-api</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-user-managment-api" target="_blank">user-managment-api</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-menu-management-api" target="_blank">menu-management-api</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-menu-api" target="_blank">menu-api</a>
       </div>
     </div>
   </section>
-
-  <!-- PANEL: DEPLOYS -->
   <section id="panel-deploys" class="panel" role="tabpanel" aria-labelledby="tab-deploys">
     <div class="container">
       <div class="column">
-        <div class="column-title">Fury Apps Deployments</div>
-        <a class="link" href="https://web.furycloud.io/kraken-authenticated-users-api/deployments" target="_blank" rel="noopener noreferrer">authenticated-users-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-audiences-api/deployments" target="_blank" rel="noopener noreferrer">audiences-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-attributes-api-v2/deployments" target="_blank" rel="noopener noreferrer">attributes-api-v2</a>
-        <a class="link" href="https://web.furycloud.io/kraken-self-management-api/deployments" target="_blank" rel="noopener noreferrer">self-management-api</a>
-        <a class="link" href="https://web.furycloud.io/shipping-users-mgmt-api/deployments" target="_blank" rel="noopener noreferrer">shipping-users-mgmt-api</a>
+                <div class="column-title">Fury Apps Deployments</div>
+        <a class="link" href="https://web.furycloud.io/kraken-authenticated-users-api/deployments" target="_blank">authenticated-users-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-audiences-api/deployments" target="_blank">audiences-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-attributes-api-v2/deployments" target="_blank">attributes-api-v2</a>
+        <a class="link" href="https://web.furycloud.io/kraken-self-management-api/deployments" target="_blank">self-management-api</a>
+        <a class="link" href="https://web.furycloud.io/shipping-users-mgmt-api/deployments" target="_blank">shipping-users-mgmt-api</a>
       </div>
-
       <div class="column">
         <div class="column-title">Fury Apps Deployments</div>
-        <a class="link" href="https://web.furycloud.io/kraken-auth-core-api/deployments" target="_blank" rel="noopener noreferrer">auth-core-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-auth-admin-api/deployments" target="_blank" rel="noopener noreferrer">auth-admin-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-application-mgmt-api/deployments" target="_blank" rel="noopener noreferrer">application-mgmt-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-role-management-api/deployments" target="_blank" rel="noopener noreferrer">role-management-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-user-managment-api/deployments" target="_blank" rel="noopener noreferrer">user-managment-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-menu-management-api/deployments" target="_blank" rel="noopener noreferrer">menu-management-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-menu-api/deployments" target="_blank" rel="noopener noreferrer">menu-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-auth-core-api/deployments" target="_blank">auth-core-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-auth-admin-api/deployments" target="_blank">auth-admin-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-application-mgmt-api/deployments" target="_blank">application-mgmt-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-role-management-api/deployments" target="_blank">role-management-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-user-managment-api/deployments" target="_blank">user-managment-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-menu-management-api/deployments" target="_blank">menu-management-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-menu-api/deployments" target="_blank">menu-api</a>
       </div>
     </div>
   </section>
 
   <script>
-    // Tabs accesibles + persistencia en localStorage
+    // Tabs simples accesibles
     const tabs = [...document.querySelectorAll('.tab-btn')];
     const panels = [...document.querySelectorAll('.panel')];
-    const STORAGE_KEY = 'shortcuts:lastTab';
 
-    function activate(id, save = false){
+    function activate(id){
       tabs.forEach(btn=>{
         const selected = btn.id === ('tab-' + id);
         btn.setAttribute('aria-selected', selected ? 'true' : 'false');
@@ -277,30 +266,12 @@
       panels.forEach(p=>{
         p.classList.toggle('active', p.id === ('panel-' + id));
       });
-      if(save) localStorage.setItem(STORAGE_KEY, id);
     }
-
-    // Restaurar desde localStorage (si existe) o por defecto 'links'
-    const last = localStorage.getItem(STORAGE_KEY) || 'links';
-
-    // DOM ready
-    window.addEventListener('DOMContentLoaded', ()=> {
-      // activar último tab
-      activate(last, false);
-
-      // setear title en links y column-titles para mostrar texto completo en hover
-      document.querySelectorAll('.link').forEach(a=>{
-        if(!a.title) a.title = a.textContent.trim();
-      });
-      document.querySelectorAll('.column-title').forEach(el=>{
-        if(!el.title) el.title = el.textContent.trim();
-      });
-    });
 
     tabs.forEach(btn=>{
       btn.addEventListener('click', ()=>{
         const id = btn.id.replace('tab-',''); // links | github | deploys
-        activate(id, true); // guardar selección
+        activate(id);
       });
       // navegación con teclado
       btn.addEventListener('keydown', (e)=>{
