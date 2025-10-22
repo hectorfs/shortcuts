@@ -40,21 +40,17 @@
     }
     header h1{ font-size:21px; margin:0; flex:1; text-shadow:0 1px 0 rgba(0,0,0,.25); }
 
-    /* TABS */
+    /* TABS (más clickeables: padding aumentado) */
     .tabs{ display:flex; gap:8px; justify-content:flex-end; align-items:center; }
     .tab-btn{
       appearance:none; border:0; cursor:pointer;
-      padding:9px 15px; border-radius:999px;
+      padding:10px 16px; border-radius:999px; /* +1px vertical, +1px horizontal */
       background:#ffffffd9; color:#0b0b0b; font-weight:600; font-size:14px;
       box-shadow:0 2px 4px rgba(0,0,0,.15), 0 0 0 1px rgba(0,0,0,.06) inset;
       transition:transform .06s ease, background-color .18s ease;
       display:flex; align-items:center; gap:.5rem;
-      /* evitar que el label del tab haga wrap */
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      /* ahora permitimos wrap natural si hiciera falta (no más ellipsis) */
     }
-    .tab-btn span{ white-space: nowrap; } /* label no-wrap */
     .tab-btn:hover{ transform:translateY(-1px); background:#fff; }
     .tab-btn[aria-selected="true"]{
       background:var(--pri); color:var(--pill); box-shadow:0 2px 6px var(--glow);
@@ -64,7 +60,7 @@
     .panel{ display:none; padding:18px 10px; width:100%; }
     .panel.active{ display:block; }
 
-    /* Contenedor y columnas */
+    /* Contenedor y columnas (centradas y compactas) */
     .container{
       display:flex;
       flex-wrap:wrap;
@@ -76,39 +72,33 @@
     }
     .column{
       display:flex; flex-direction:column; gap:10px;
-      flex: 0 1 var(--col-min);
+      flex: 0 1 var(--col-min); /* no grow: evita estirar si hay pocas columnas */
       min-width: var(--col-min);
       max-width: calc(var(--col-min) * 1.2);
     }
-
-    /* evitar wrap en títulos de columna y truncar con ... */
     .column-title{
       background-color:var(--pri);
       font-size:15px; font-weight:700; text-align:center;
       color:var(--pill); box-shadow:0 2px 5px var(--glow);
       padding:9px 11px; border-radius:6px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      /* permitimos varias líneas si hace falta, pero con el padding aumentado queda legible */
+      white-space: normal;
     }
-
-    /* links en una sola línea; si son largos, se muestran con "..." */
     .link{
-      padding:11px 13px;
+      padding:13px 15px; /* aumentado para mejor clic */
       background:var(--card-bg);
       border:1px solid var(--card-bd);
       border-radius:6px;
       text-decoration:none;
       color:var(--ink);
       text-align:center;
-      font-size:14px;
+      font-size:15px; /* +1px respecto a la versión anterior */
       transition: background-color .16s ease, transform .06s ease;
       box-shadow:0 1px 3px rgba(10,10,10,.9);
-
       display:block;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      /* permitimos wrap en caso de que el texto sea largo, para evitar recorte */
+      white-space: normal;
+      word-break: break-word;
     }
     .link:hover{ background-color:#a0a0a0; color:#111; transform:translateY(-2px); }
 
@@ -121,11 +111,8 @@
     }
     @media (max-width:720px){
       .tabs{ gap:6px; }
-      .tab-btn{ font-size:13px; padding:8px 10px; }
+      .tab-btn{ font-size:13px; padding:9px 12px; }
       .column{ flex: 1 1 100%; min-width:100%; max-width:100%; }
-      /* en móvil permitimos que el título de columna use dos líneas si hace falta (mejor UX) */
-      .column-title{ white-space: normal; }
-      .tab-btn{ white-space: nowrap; } /* tabs siempre no-wrap */
     }
   </style>
 </head>
@@ -307,13 +294,6 @@
       });
       document.querySelectorAll('.column-title').forEach(el=>{
         if(!el.title) el.title = el.textContent.trim();
-      });
-      // también title en tabs (por si el label se trunca)
-      document.querySelectorAll('.tab-btn').forEach(btn=>{
-        if(!btn.title) {
-          const txt = [...btn.querySelectorAll('span')].map(s=>s.textContent.trim()).join(' ');
-          btn.title = txt;
-        }
       });
     });
 
