@@ -42,114 +42,262 @@
     }
     header h1{
       font-size:20px; margin:0; flex:1;
+      text-shadow:0 1px 0 rgba(0,0,0,.25);
     }
 
-    .tabs{ display:flex; gap:6px; justify-content:flex-end; }
+    /* TABS (alineados a la derecha) */
+    .tabs{
+      display:flex; gap:6px; justify-content:flex-end; align-items:center;
+    }
     .tab-btn{
-      border:0; cursor:pointer;
+      appearance:none; border:0; cursor:pointer;
       padding:8px 14px; border-radius:999px;
-      background:#fff; font-size:13px;
+      background:#ffffffd9; color:#0b0b0b; font-weight:600; font-size:13px;
+      box-shadow:0 2px 4px rgba(0,0,0,.2), 0 0 0 1px rgba(0,0,0,.08) inset;
+      transition:transform .06s ease, background-color .2s ease;
+      display:flex; align-items:center; gap:.5rem;
     }
+    .tab-btn:hover{ transform:translateY(-1px); background:#fff; }
     .tab-btn[aria-selected="true"]{
-      background:var(--pri); color:var(--pill);
+      background:var(--pri);
+      color:var(--pill);
+      box-shadow:0 2px 5px var(--glow);
     }
 
-    .panel{ display:none; padding:20px; }
+    /* Layout columnas / tarjetas */
+    .panel{ display:none; padding:20px; width:100%; }
     .panel.active{ display:block; }
 
+    /* --- AJUSTES IMPORTANTES PARA MÁS COLUMNAS --- */
     .container{
-      display:flex; flex-wrap:wrap; gap:16px;
-      max-width:1400px; margin:0 auto;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:16px;                 /* espacio entre columnas */
+      padding:10px;
+      max-width:1400px;         /* mayor ancho para mostrar más columnas */
+      margin:0 auto;
     }
     .column{
-      display:flex; flex-direction:column; gap:12px;
-      flex:1 1 200px; min-width:200px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      /* permite que haya más columnas en la fila: base de 200px */
+      flex: 1 1 200px;
+      min-width:200px;
+      max-width: 1fr;
     }
     .column-title{
       background-color:var(--pri);
-      text-align:center; padding:8px; border-radius:6px;
-      color:var(--pill); font-weight:bold;
+      font-size:14px; font-weight:bold; text-align:center; margin-bottom:8px;
+      color:var(--pill); box-shadow:0 2px 5px var(--glow); padding:8px 10px; border-radius:6px;
     }
     .link{
-      padding:12px;
-      background:#fff;
-      border:1px solid #ddd;
-      border-radius:5px;
-      text-decoration:none;
-      color:#333;
-      text-align:center;
+      padding:12px 14px; background-color:var(--card-bg); border:1px solid var(--card-bd);
+      border-radius:5px; text-decoration:none; color:var(--ink); text-align:center; font-size:13px;
+      transition: background-color .2s ease, transform .06s ease;
+      box-shadow:0px 2px 4px rgba(10,10,10,1);
     }
-    .link:hover{ background:#a0a0a0; color:#111; }
+    .link:hover{ background-color:#a0a0a0; color:#111; transform:translateY(-1px); }
+
+    /* Responsivo: en pantallas pequeñas las columnas ocupan 100% */
+    @media (max-width:1100px){
+      header .bar{ max-width:1000px; }
+      .container{ gap:14px; }
+    }
+    @media (max-width:720px){
+      .tabs{ gap:4px; }
+      .tab-btn{ font-size:12px; padding:7px 10px; }
+      .column{ min-width:100%; flex: 1 1 100%; }
+    }
   </style>
 </head>
 
 <body>
-
-<header>
-  <div class="bar">
-    <h1>🔗 Shortcuts</h1>
-    <div class="tabs">
-      <button class="tab-btn" id="tab-links" aria-selected="true">Links</button>
-      <button class="tab-btn" id="tab-github">GitHub</button>
-      <button class="tab-btn" id="tab-deploys">Deploys</button>
+  <header>
+    <div class="bar">
+      <h1>🔗 Shortcuts 🔗</h1>
+      <div class="tabs" role="tablist" aria-label="Secciones">
+        <button class="tab-btn" role="tab" aria-selected="true" aria-controls="panel-links" id="tab-links">
+          <span aria-hidden="true">🔗</span><span>Links</span>
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-github" id="tab-github">
+          <span aria-hidden="true">🐙</span><span>GitHub</span>
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-deploys" id="tab-deploys">
+          <span aria-hidden="true">🚀</span><span>Deploys</span>
+        </button>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<main id="panel-links" class="panel active">
-  <div class="container">
-    <div class="column">
-      <div class="column-title">Links Favs</div>
-      <a class="link" href="https://mail.google.com/mail/u/0/#inbox">Gmail</a>
-      <a class="link" href="https://drive.google.com/drive/my-drive">My Drive</a>
-      <a class="link" href="https://calendar.google.com/calendar/u/0/r">Calendar</a>
-      <a class="link" href="https://meet.google.com/landing?authuser=0">Meet</a>
+  <main id="panel-links" class="panel active" role="tabpanel" aria-labelledby="tab-links">
+    <div class="container">
+      <div class="column">
+        <div class="column-title">Links Favs</div>
+        <a class="link" href="https://mail.google.com/mail/u/0/#inbox">Gmail</a>
+        <a class="link" href="https://drive.google.com/drive/my-drive">My Drive</a>
+        <a class="link" href="https://drive.google.com/drive/shared-drives">Drive Share</a>
+        <a class="link" href="https://mail.google.com/chat/u/0/#chat/home">Google Chat</a>
+        <a class="link" href="https://calendar.google.com/calendar/u/0/r">Calendar</a>
+        <a class="link" href="https://meet.google.com/landing?authuser=0">Meet</a>
+        <a class="link" href="https://meli.workplace.com/">Workplace</a>
+        <a class="link" href="https://meli.udemy.com/organization/home/">Udemy</a>
+        <a class="link" href="https://nasdaq-meli.app.opsgenie.com/alert/list">Opsgenie</a>
+      </div>
+
+      <div class="column">
+        <div class="column-title">Utils Tools</div>
+        <a class="link" href="https://drive.google.com/drive/my-drive?ths=true">Drive</a>
+        <a class="link" href="https://docs.google.com/document">Docs</a>
+        <a class="link" href="https://docs.google.com/spreadsheets">Sheets</a>
+        <a class="link" href="https://docs.google.com/presentation">Presentation</a>
+        <a class="link" href="https://app.diagrams.net">Draw.io</a>
+        <a class="link" href="https://mercadolibre.atlassian.net/jira/software/c/projects/SGP1/boards/6528/backlog">Jira : Backlog</a>
+        <a class="link" href="https://excalidraw.com">Excalidraw</a>
+        <a class="link" href="https://mordor.adminml.com/profile">Mordor</a>
+        <a class="link" href="https://melihelp.adminml.com/board">Meli Help</a>
+      </div>
+
+      <div class="column">
+        <div class="column-title">Kraken Tools</div>
+        <a class="link" href="https://envios.adminml.com/tools/auth/users">Users</a>
+        <a class="link" href="https://xtools.adminml.com/management/roles?section=my-roles">Roles</a>
+        <a class="link" href="https://xtools.adminml.com/management/applications">Apps</a>
+        <a class="link" href="https://xtools.adminml.com/management/domains?section=my-domains">Domains</a>
+        <a class="link" href="http://xtools.adminml.com/tools/auth/silos">Silos</a>
+        <a class="link" href="https://xtools.adminml.com/management/attributes">Atributos</a>
+        <a class="link" href="https://xtools.adminml.com/management/roles/biso-pane">BISO Pane</a>
+        <a class="link" href="https://envios.adminml.com/tools/rules/permission-incompatibilities">Incomp Permisos</a>
+        <a class="link" href="https://envios.adminml.com/tools/events?eventCollections=kraken-authorization&page=1">Tantor</a>
+      </div>
+
+      <div class="column">
+        <div class="column-title">Alfred Tools</div>
+        <a class="link" href="https://envios.adminml.com/tools/alfred/configurations">Alfred Configs</a>
+        <a class="link" href="https://envios.adminml.com/tools/alfred/flows">Alfred Flows</a>
+        <a class="link" href="https://envios.adminml.com/tools/alfred/tickets">Alfred Tickets</a>
+        <div class="column-title">Big Query & DME</div>
+        <a class="link" href="https://console.cloud.google.com/bigquery?project=meli-bi-data&d=SHIPPING_BI">BigQuery Console</a>
+        <a class="link" href="https://datasuite.adminml.com/data-flow">Data Suite DME</a>
+        <div class="column-title">IA</div>
+        <a class="link" href="https://meli-gpt.adminml.com">MELI GPT</a>
+        <a class="link" href="https://chatgpt.com">Chat GPT</a>
+      </div>
+
+      <div class="column">
+        <div class="column-title">Fury Apps</div>
+        <a class="link" href="https://web.furycloud.io/workspace?show=applications">Fury Apps</a>
+        <a class="link" href="https://web.furycloud.io/kraken-authenticated-users-api/infrastructure">authenticated-users-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-audiences-api/infrastructure">audiences-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-attributes-api-v2/infrastructure">attributes-api-v2</a>
+        <a class="link" href="https://web.furycloud.io/kraken-self-management-api/infrastructure">self-management-api</a>
+        <a class="link" href="https://web.furycloud.io/shipping-users-mgmt-api/infrastructure">shipping-users-mgmt-api</a>
+      </div>
+
+      <div class="column">
+        <div class="column-title">Fury Apps</div>
+        <a class="link" href="https://web.furycloud.io/kraken-auth-core-api/infrastructure">auth-core-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-auth-admin-api/infrastructure">auth-admin-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-application-mgmt-api/infrastructure">application-mgmt-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-role-management-api/infrastructure">role-management-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-user-managment-api/infrastructure">user-managment-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-menu-management-api/infrastructure">menu-management-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-menu-api/infrastructure">menu-api</a>
+      </div>
     </div>
-  </div>
-</main>
-
-<section id="panel-github" class="panel">
-  <div class="container">
-    <div class="column">
-      <div class="column-title">GitHub</div>
-      <a class="link" href="https://github.com/melisource">melisource</a>
+  </main>
+  <section id="panel-github" class="panel" role="tabpanel" aria-labelledby="tab-github">
+    <div class="container">
+      <div class="column">
+        <div class="column-title">Fury Apps GitHub</div>
+        <a class="link" href="https://github.com/melisource/fury_kraken-authenticated-users-api">authenticated-users-api</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-audiences-api">audiences-api</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-attributes-api-v2">attributes-api-v2</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-self-management-api">self-management-api</a>
+        <a class="link" href="https://github.com/melisource/fury_shipping-users-mgmt-api">shipping-users-mgmt-api</a>
+      </div>
+      <div class="column">
+        <div class="column-title">Fury Apps GitHub</div>
+        <a class="link" href="https://github.com/melisource/fury_kraken-auth-core-api">auth-core-api</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-auth-admin-api">auth-admin-api</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-application-mgmt-api">application-mgmt-api</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-role-management-api">role-management-api</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-user-managment-api">user-managment-api</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-menu-management-api">menu-management-api</a>
+        <a class="link" href="https://github.com/melisource/fury_kraken-menu-api">menu-api</a>
+      </div>
     </div>
-  </div>
-</section>
-
-<section id="panel-deploys" class="panel">
-  <div class="container">
-    <div class="column">
-      <div class="column-title">Deploys</div>
-      <a class="link" href="https://web.furycloud.io">Fury</a>
+  </section>
+  <section id="panel-deploys" class="panel" role="tabpanel" aria-labelledby="tab-deploys">
+    <div class="container">
+      <div class="column">
+                <div class="column-title">Fury Apps Deployments</div>
+        <a class="link" href="https://web.furycloud.io/kraken-authenticated-users-api/deployments">authenticated-users-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-audiences-api/deployments">audiences-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-attributes-api-v2/deployments">attributes-api-v2</a>
+        <a class="link" href="https://web.furycloud.io/kraken-self-management-api/deployments">self-management-api</a>
+        <a class="link" href="https://web.furycloud.io/shipping-users-mgmt-api/deployments">shipping-users-mgmt-api</a>
+      </div>
+      <div class="column">
+        <div class="column-title">Fury Apps Deployments</div>
+        <a class="link" href="https://web.furycloud.io/kraken-auth-core-api/deployments">auth-core-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-auth-admin-api/deployments">auth-admin-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-application-mgmt-api/deployments">application-mgmt-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-role-management-api/deployments">role-management-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-user-managment-api/deployments">user-managment-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-menu-management-api/deployments">menu-management-api</a>
+        <a class="link" href="https://web.furycloud.io/kraken-menu-api/deployments">menu-api</a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SCRIPT DE TABS -->
-<script>
-  const tabs = document.querySelectorAll('.tab-btn');
-  const panels = document.querySelectorAll('.panel');
+  <script>
+    // Tabs simples accesibles
+    const tabs = [...document.querySelectorAll('.tab-btn')];
+    const panels = [...document.querySelectorAll('.panel')];
 
-  tabs.forEach(btn => {
-    btn.addEventListener('click', () => {
-      tabs.forEach(b => b.setAttribute('aria-selected', 'false'));
-      panels.forEach(p => p.classList.remove('active'));
+    function activate(id){
+      tabs.forEach(btn=>{
+        const selected = btn.id === ('tab-' + id);
+        btn.setAttribute('aria-selected', selected ? 'true' : 'false');
+        btn.tabIndex = selected ? 0 : -1;
+      });
+      panels.forEach(p=>{
+        p.classList.toggle('active', p.id === ('panel-' + id));
+      });
+    }
 
-      btn.setAttribute('aria-selected', 'true');
-      document.getElementById('panel-' + btn.id.replace('tab-', '')).classList.add('active');
+    tabs.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const id = btn.id.replace('tab-',''); // links | github | deploys
+        activate(id);
+      });
+      // navegación con teclado
+      btn.addEventListener('keydown', (e)=>{
+        const i = tabs.indexOf(btn);
+        if(e.key === 'ArrowRight'){ (tabs[i+1] || tabs[0]).focus(); }
+        if(e.key === 'ArrowLeft'){ (tabs[i-1] || tabs[tabs.length-1]).focus(); }
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          btn.click();
+        }
+      });
     });
-  });
-</script>
+  </script>
 
-<!-- SCRIPT PARA CONTROLAR NUEVA PESTAÑA -->
+  <!-- Script para decidir target según query param ?newTab=true -->
 <script>
-  const params = new URLSearchParams(window.location.search);
-  const openInNewTab = params.get('newTab') === 'true';
+  (function () {
+    const params = new URLSearchParams(window.location.search);
 
-  document.querySelectorAll('a.link').forEach(link => {
-    link.target = openInNewTab ? '_blank' : '_self';
-  });
+    // default = nueva pestaña
+    const openInNewTab = params.get('newTab') !== 'false';
+
+    document.querySelectorAll('a.link').forEach(link => {
+      link.target = openInNewTab ? '_blank' : '_self';
+    });
+  })();
 </script>
 
 </body>
