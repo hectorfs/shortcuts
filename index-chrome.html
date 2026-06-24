@@ -95,6 +95,15 @@
       box-shadow:0px 2px 4px rgba(10,10,10,1);
     }
     .link:hover{ background-color:#a0a0a0; color:#111; transform:translateY(-1px); }
+    .link-row{
+      display:grid;
+      grid-template-columns: minmax(0, 1fr) 42px;
+      gap:8px;
+    }
+    .icon-link{
+      padding:12px 0;
+      font-size:15px;
+    }
 
     @media (max-width:1100px){
       header .bar{ max-width:1000px; }
@@ -295,19 +304,58 @@
       </div>
       <div class="column">
         <div class="column-title">📈 Datadog</div>
-        <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-authenticated-users-api&tpl_var_scope=prod-users-sink">authenticated-users-api</a>
-        <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-audiences-api&tpl_var_scope=prod">audiences-api</a>
-        <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-attributes-api-v2&tpl_var_scope=prod">attributes-api-v2</a>
-        <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-self-management-api&tpl_var_scope=prod">self-management-api</a>
-        <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=shipping-users-mgmt-api&tpl_var_scope=prod">shipping-users-mgmt-api</a>
-        <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-data-aggregator-api&tpl_var_scope=prod">data-aggregator-api</a>
-        <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-auth-core-api&tpl_var_scope=prod">auth-core-api</a>
-        <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-auth-admin-api&tpl_var_scope=prod">auth-admin-api</a>
-        <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-application-mgmt-api&tpl_var_scope=prod">application-mgmt-api</a>
-        <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-role-management-api&tpl_var_scope=prod">role-management-api</a>
-        <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-user-managment-api&tpl_var_scope=prod-integration">user-managment-api</a>
-        <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-menu-management-api&tpl_var_scope=prod">menu-management-api</a>
-        <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-menu-api&tpl_var_scope=prod">menu-api</a>
+        <div class="link-row">
+          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-authenticated-users-api&tpl_var_scope=prod-users-sink">authenticated-users-api</a>
+          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-authenticated-users-api?env=prod-users-sink#traces" aria-label="APM traces authenticated-users-api">⚙️</a>
+        </div>
+        <div class="link-row">
+          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-audiences-api&tpl_var_scope=prod">audiences-api</a>
+          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-audiences-api?env=prod#traces" aria-label="APM traces audiences-api">⚙️</a>
+        </div>
+        <div class="link-row">
+          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-attributes-api-v2&tpl_var_scope=prod">attributes-api-v2</a>
+          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-attributes-api-v2?env=prod#traces" aria-label="APM traces attributes-api-v2">⚙️</a>
+        </div>
+        <div class="link-row">
+          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-self-management-api&tpl_var_scope=prod">self-management-api</a>
+          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-self-management-api?env=prod#traces" aria-label="APM traces self-management-api">⚙️</a>
+        </div>
+        <div class="link-row">
+          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=shipping-users-mgmt-api&tpl_var_scope=prod">shipping-users-mgmt-api</a>
+          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Ashipping-users-mgmt-api?env=prod#traces" aria-label="APM traces shipping-users-mgmt-api">⚙️</a>
+        </div>
+        <div class="link-row">
+          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-data-aggregator-api&tpl_var_scope=prod">data-aggregator-api</a>
+          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-data-aggregator-api?env=prod#traces" aria-label="APM traces data-aggregator-api">⚙️</a>
+        </div>
+        <div class="link-row">
+          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-auth-core-api&tpl_var_scope=prod">auth-core-api</a>
+          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-auth-core-api?env=prod#traces" aria-label="APM traces auth-core-api">⚙️</a>
+        </div>
+        <div class="link-row">
+          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-auth-admin-api&tpl_var_scope=prod">auth-admin-api</a>
+          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-auth-admin-api?env=prod#traces" aria-label="APM traces auth-admin-api">⚙️</a>
+        </div>
+        <div class="link-row">
+          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-application-mgmt-api&tpl_var_scope=prod">application-mgmt-api</a>
+          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-application-mgmt-api?env=prod#traces" aria-label="APM traces application-mgmt-api">⚙️</a>
+        </div>
+        <div class="link-row">
+          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-role-management-api&tpl_var_scope=prod">role-management-api</a>
+          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-role-management-api?env=prod#traces" aria-label="APM traces role-management-api">⚙️</a>
+        </div>
+        <div class="link-row">
+          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-user-managment-api&tpl_var_scope=prod-integration">user-managment-api</a>
+          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-user-managment-api?env=prod-integration#traces" aria-label="APM traces user-managment-api">⚙️</a>
+        </div>
+        <div class="link-row">
+          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-menu-management-api&tpl_var_scope=prod">menu-management-api</a>
+          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-menu-management-api?env=prod#traces" aria-label="APM traces menu-management-api">⚙️</a>
+        </div>
+        <div class="link-row">
+          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-menu-api&tpl_var_scope=prod">menu-api</a>
+          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-menu-api?env=prod#traces" aria-label="APM traces menu-api">⚙️</a>
+        </div>
       </div>
       <div class="column">
         <div class="column-title">📊 Grafana</div>
