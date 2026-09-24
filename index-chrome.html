@@ -105,14 +105,98 @@
       font-size:15px;
     }
 
+    .guardias-container{
+      width:100%;
+      max-width:1400px;
+      margin:0 auto;
+      padding:10px;
+    }
+    .guardia-header,
+    .guardia-row{
+      display:grid;
+      grid-template-columns:minmax(220px, 280px) minmax(0, 1fr);
+      gap:16px;
+      align-items:center;
+    }
+    .guardia-header{
+      margin-bottom:10px;
+      padding:8px 12px;
+      border-radius:6px;
+      background-color:var(--pri);
+      color:var(--pill);
+      font-size:14px;
+      font-weight:bold;
+      box-shadow:0 2px 5px var(--glow);
+    }
+    .guardias-list{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .guardia-row{
+      padding:12px;
+      border:1px solid var(--card-bd);
+      border-radius:7px;
+      background-color:rgba(255,255,255,.92);
+      box-shadow:0 2px 4px rgba(10,10,10,.65);
+    }
+    .app-name{
+      color:var(--ink);
+      font-size:14px;
+      font-weight:bold;
+      overflow-wrap:anywhere;
+    }
+    .access-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px 16px;
+    }
+    .access-group{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      padding-right:16px;
+      border-right:1px solid var(--card-bd);
+    }
+    .access-group:last-child{
+      padding-right:0;
+      border-right:0;
+    }
+    .access-link{
+      padding:9px 11px;
+      border:1px solid var(--card-bd);
+      border-radius:5px;
+      background-color:var(--card-bg);
+      color:var(--ink);
+      text-decoration:none;
+      text-align:center;
+      font-size:12px;
+      font-weight:600;
+      box-shadow:0 2px 3px rgba(10,10,10,.4);
+      transition:background-color .2s ease, transform .06s ease;
+    }
+    .access-link:hover{
+      background-color:#a0a0a0;
+      color:#111;
+      transform:translateY(-1px);
+    }
+
     @media (max-width:1100px){
       header .bar{ max-width:1000px; }
       .container{ gap:14px; }
     }
     @media (max-width:720px){
+      header .bar{ align-items:flex-start; }
       .tabs{ gap:4px; }
       .tab-btn{ font-size:12px; padding:7px 10px; }
-      .column{ min-width:100%; flex: 1 1 100%; }
+      .column{ min-width:100%; flex:1 1 100%; }
+      .guardia-header{ display:none; }
+      .guardia-row{
+        grid-template-columns:1fr;
+        gap:10px;
+      }
+      .access-links{ gap:6px; }
+      .access-link{ flex:1 1 auto; }
     }
   </style>
 </head>
@@ -127,15 +211,6 @@
         </button>
         <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-guardias" id="tab-guardias">
           <span aria-hidden="true">📊</span><span>Guardias</span>
-        </button>
-        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-streams" id="tab-streams">
-          <span aria-hidden="true">🌊</span><span>Streams</span>
-        </button>
-        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-github" id="tab-github">
-          <span aria-hidden="true">🐙</span><span>GitHub</span>
-        </button>
-        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-deploys" id="tab-deploys">
-          <span aria-hidden="true">🚀</span><span>Deploys</span>
         </button>
       </div>
     </div>
@@ -242,218 +317,97 @@
   </main>
 
   <section id="panel-guardias" class="panel" role="tabpanel" aria-labelledby="tab-guardias">
-    <div class="container">
-      <div class="column">
-        <div class="column-title">🖥️ Infra</div>
-        <a class="link" href="https://web.furycloud.io/kraken-authenticated-users-api/infrastructure">authenticated-users-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-audiences-api/infrastructure">audiences-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-attributes-api-v2/infrastructure">attributes-api-v2</a>
-        <a class="link" href="https://web.furycloud.io/kraken-self-management-api/infrastructure">self-management-api</a>
-        <a class="link" href="https://web.furycloud.io/shipping-users-mgmt-api/infrastructure">shipping-users-mgmt-api</a>
-        <a class="link" href="https://web.furycloud.io/engineering/applications/kraken-data-aggregator-api/infrastructure">data-aggregator-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-auth-core-api/infrastructure">auth-core-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-auth-admin-api/infrastructure">auth-admin-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-application-mgmt-api/infrastructure">application-mgmt-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-role-management-api/infrastructure">role-management-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-user-managment-api/infrastructure">user-managment-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-menu-management-api/infrastructure">menu-management-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-menu-api/infrastructure">menu-api</a>
+    <div class="guardias-container">
+      <div class="guardia-header" aria-hidden="true">
+        <span>Aplicación</span>
+        <span>Accesos</span>
       </div>
-      <div class="column">
-        <div class="column-title">🌊 Streams</div>
-        <a class="link" href="https://web.furycloud.io/kraken-authenticated-users-api/streams">authenticated-users-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-audiences-api/streams">audiences-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-attributes-api-v2/streams">attributes-api-v2</a>
-        <a class="link" href="https://web.furycloud.io/kraken-self-management-api/streams">self-management-api</a>
-        <a class="link" href="https://web.furycloud.io/shipping-users-mgmt-api/streams">shipping-users-mgmt-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-data-aggregator-api/streams">data-aggregator-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-auth-core-api/streams">auth-core-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-auth-admin-api/streams">auth-admin-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-application-mgmt-api/streams">application-mgmt-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-role-management-api/streams">role-management-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-user-managment-api/streams">user-managment-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-menu-management-api/streams">menu-management-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-menu-api/streams">menu-api</a>
-      </div>
-      <div class="column">
-        <div class="column-title">🐙 GitHub</div>
-        <a class="link" href="https://github.com/melisource/fury_kraken-authenticated-users-api">authenticated-users-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-audiences-api">audiences-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-attributes-api-v2">attributes-api-v2</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-self-management-api">self-management-api</a>
-        <a class="link" href="https://github.com/melisource/fury_shipping-users-mgmt-api">shipping-users-mgmt-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-data-aggregator-api">data-aggregator-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-auth-core-api">auth-core-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-auth-admin-api">auth-admin-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-application-mgmt-api">application-mgmt-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-role-management-api">role-management-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-user-managment-api">user-managment-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-menu-management-api">menu-management-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-menu-api">menu-api</a>
-      </div>
-      <div class="column">
-        <div class="column-title">🚀 Deploys</div>
-        <a class="link" href="https://web.furycloud.io/kraken-authenticated-users-api/deployments">authenticated-users-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-audiences-api/deployments">audiences-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-attributes-api-v2/deployments">attributes-api-v2</a>
-        <a class="link" href="https://web.furycloud.io/kraken-self-management-api/deployments">self-management-api</a>
-        <a class="link" href="https://web.furycloud.io/shipping-users-mgmt-api/deployments">shipping-users-mgmt-api</a>
-        <a class="link" href="https://web.furycloud.io/engineering/applications/kraken-data-aggregator-api/deployments">data-aggregator-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-auth-core-api/deployments">auth-core-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-auth-admin-api/deployments">auth-admin-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-application-mgmt-api/deployments">application-mgmt-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-role-management-api/deployments">role-management-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-user-managment-api/deployments">user-managment-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-menu-management-api/deployments">menu-management-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-menu-api/deployments">menu-api</a>
-      </div>
-      <div class="column">
-        <div class="column-title">📈 Datadog</div>
-        <div class="link-row">
-          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-authenticated-users-api&tpl_var_scope=prod-users-sink">authenticated-users-api</a>
-          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-authenticated-users-api?env=prod-users-sink#traces" aria-label="APM traces authenticated-users-api">⚙️</a>
-        </div>
-        <div class="link-row">
-          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-audiences-api&tpl_var_scope=prod">audiences-api</a>
-          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-audiences-api?env=prod#traces" aria-label="APM traces audiences-api">⚙️</a>
-        </div>
-        <div class="link-row">
-          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-attributes-api-v2&tpl_var_scope=prod">attributes-api-v2</a>
-          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-attributes-api-v2?env=prod#traces" aria-label="APM traces attributes-api-v2">⚙️</a>
-        </div>
-        <div class="link-row">
-          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-self-management-api&tpl_var_scope=prod">self-management-api</a>
-          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-self-management-api?env=prod#traces" aria-label="APM traces self-management-api">⚙️</a>
-        </div>
-        <div class="link-row">
-          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=shipping-users-mgmt-api&tpl_var_scope=prod">shipping-users-mgmt-api</a>
-          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Ashipping-users-mgmt-api?env=prod#traces" aria-label="APM traces shipping-users-mgmt-api">⚙️</a>
-        </div>
-        <div class="link-row">
-          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-data-aggregator-api&tpl_var_scope=prod">data-aggregator-api</a>
-          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-data-aggregator-api?env=prod#traces" aria-label="APM traces data-aggregator-api">⚙️</a>
-        </div>
-        <div class="link-row">
-          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-auth-core-api&tpl_var_scope=prod">auth-core-api</a>
-          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-auth-core-api?env=prod#traces" aria-label="APM traces auth-core-api">⚙️</a>
-        </div>
-        <div class="link-row">
-          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-auth-admin-api&tpl_var_scope=prod">auth-admin-api</a>
-          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-auth-admin-api?env=prod#traces" aria-label="APM traces auth-admin-api">⚙️</a>
-        </div>
-        <div class="link-row">
-          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-application-mgmt-api&tpl_var_scope=prod">application-mgmt-api</a>
-          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-application-mgmt-api?env=prod#traces" aria-label="APM traces application-mgmt-api">⚙️</a>
-        </div>
-        <div class="link-row">
-          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-role-management-api&tpl_var_scope=prod">role-management-api</a>
-          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-role-management-api?env=prod#traces" aria-label="APM traces role-management-api">⚙️</a>
-        </div>
-        <div class="link-row">
-          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-user-managment-api&tpl_var_scope=prod-integration">user-managment-api</a>
-          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-user-managment-api?env=prod-integration#traces" aria-label="APM traces user-managment-api">⚙️</a>
-        </div>
-        <div class="link-row">
-          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-menu-management-api&tpl_var_scope=prod">menu-management-api</a>
-          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-menu-management-api?env=prod#traces" aria-label="APM traces menu-management-api">⚙️</a>
-        </div>
-        <div class="link-row">
-          <a class="link" href="https://app.datadoghq.com/dashboard/88i-mef-g8w?tpl_var_application=kraken-menu-api&tpl_var_scope=prod">menu-api</a>
-          <a class="link icon-link" href="https://app.datadoghq.com/apm/entity/service%3Akraken-menu-api?env=prod#traces" aria-label="APM traces menu-api">⚙️</a>
-        </div>
-      </div>
-      <div class="column">
-        <div class="column-title">📊 Grafana</div>
-        <a class="link" href="https://grafana.furycloud.io/d/cei4qvlhweadcdclickhouse?var-application=kraken-authenticated-users-api&var-scope=prod-users-sink">authenticated-users-api</a>
-        <a class="link" href="https://grafana.furycloud.io/d/cei4qvlhweadcdclickhouse?var-application=kraken-audiences-api&var-scope=prod">audiences-api</a>
-        <a class="link" href="https://grafana.furycloud.io/d/cei4qvlhweadcdclickhouse?var-application=kraken-attributes-api-v2&var-scope=prod">attributes-api-v2</a>
-        <a class="link" href="https://grafana.furycloud.io/d/cei4qvlhweadcdclickhouse?var-application=kraken-self-management-api&var-scope=prod">self-management-api</a>
-        <a class="link" href="https://grafana.furycloud.io/d/cei4qvlhweadcdclickhouse?var-application=shipping-users-mgmt-api&var-scope=prod">shipping-users-mgmt-api</a>
-        <a class="link" href="https://grafana.furycloud.io/d/cei4qvlhweadcdclickhouse?var-application=kraken-data-aggregator-api&var-scope=prod">data-aggregator-api</a>
-        <a class="link" href="https://grafana.furycloud.io/d/cei4qvlhweadcdclickhouse?var-application=kraken-auth-core-api&var-scope=prod">auth-core-api</a>
-        <a class="link" href="https://grafana.furycloud.io/d/cei4qvlhweadcdclickhouse?var-application=kraken-auth-admin-api&var-scope=prod">auth-admin-api</a>
-        <a class="link" href="https://grafana.furycloud.io/d/cei4qvlhweadcdclickhouse?var-application=kraken-application-mgmt-api&var-scope=prod">application-mgmt-api</a>
-        <a class="link" href="https://grafana.furycloud.io/d/cei4qvlhweadcdclickhouse?var-application=kraken-role-management-api&var-scope=prod">role-management-api</a>
-        <a class="link" href="https://grafana.furycloud.io/d/cei4qvlhweadcdclickhouse?var-application=kraken-user-managment-api&var-scope=prod-integration">user-managment-api</a>
-        <a class="link" href="https://grafana.furycloud.io/d/cei4qvlhweadcdclickhouse?var-application=kraken-menu-management-api&var-scope=prod">menu-management-api</a>
-        <a class="link" href="https://grafana.furycloud.io/d/cei4qvlhweadcdclickhouse?var-application=kraken-menu-api&var-scope=prod">menu-api</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="panel-github" class="panel" role="tabpanel" aria-labelledby="tab-github">
-    <div class="container">
-      <div class="column">
-        <div class="column-title">Fury Apps GitHub</div>
-        <a class="link" href="https://github.com/melisource/fury_kraken-authenticated-users-api">authenticated-users-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-audiences-api">audiences-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-attributes-api-v2">attributes-api-v2</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-self-management-api">self-management-api</a>
-        <a class="link" href="https://github.com/melisource/fury_shipping-users-mgmt-api">shipping-users-mgmt-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-data-aggregator-api">data-aggregator-api</a>
-      </div>
-      <div class="column">
-        <div class="column-title">Fury Apps GitHub</div>
-        <a class="link" href="https://github.com/melisource/fury_kraken-auth-core-api">auth-core-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-auth-admin-api">auth-admin-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-application-mgmt-api">application-mgmt-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-role-management-api">role-management-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-user-managment-api">user-managment-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-menu-management-api">menu-management-api</a>
-        <a class="link" href="https://github.com/melisource/fury_kraken-menu-api">menu-api</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="panel-deploys" class="panel" role="tabpanel" aria-labelledby="tab-deploys">
-    <div class="container">
-      <div class="column">
-        <div class="column-title">Fury Apps Deployments</div>
-        <a class="link" href="https://web.furycloud.io/kraken-authenticated-users-api/deployments">authenticated-users-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-audiences-api/deployments">audiences-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-attributes-api-v2/deployments">attributes-api-v2</a>
-        <a class="link" href="https://web.furycloud.io/kraken-self-management-api/deployments">self-management-api</a>
-        <a class="link" href="https://web.furycloud.io/shipping-users-mgmt-api/deployments">shipping-users-mgmt-api</a>
-        <a class="link" href="https://web.furycloud.io/engineering/applications/kraken-data-aggregator-api/deployments">data-aggregator-api</a>
-      </div>
-      <div class="column">
-        <div class="column-title">Fury Apps Deployments</div>
-        <a class="link" href="https://web.furycloud.io/kraken-auth-core-api/deployments">auth-core-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-auth-admin-api/deployments">auth-admin-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-application-mgmt-api/deployments">application-mgmt-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-role-management-api/deployments">role-management-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-user-managment-api/deployments">user-managment-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-menu-management-api/deployments">menu-management-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-menu-api/deployments">menu-api</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="panel-streams" class="panel" role="tabpanel" aria-labelledby="tab-streams">
-    <div class="container">
-      <div class="column">
-        <div class="column-title">Fury Apps Streams</div>
-        <a class="link" href="https://web.furycloud.io/kraken-authenticated-users-api/streams">authenticated-users-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-audiences-api/streams">audiences-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-attributes-api-v2/streams">attributes-api-v2</a>
-        <a class="link" href="https://web.furycloud.io/kraken-self-management-api/streams">self-management-api</a>
-        <a class="link" href="https://web.furycloud.io/shipping-users-mgmt-api/streams">shipping-users-mgmt-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-data-aggregator-api/streams">data-aggregator-api</a>
-      </div>
-      <div class="column">
-        <div class="column-title">Fury Apps Streams</div>
-        <a class="link" href="https://web.furycloud.io/kraken-auth-core-api/streams">auth-core-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-auth-admin-api/streams">auth-admin-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-application-mgmt-api/streams">application-mgmt-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-role-management-api/streams">role-management-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-user-managment-api/streams">user-managment-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-menu-management-api/streams">menu-management-api</a>
-        <a class="link" href="https://web.furycloud.io/kraken-menu-api/streams">menu-api</a>
-      </div>
+      <div id="guardias-apps" class="guardias-list"></div>
     </div>
   </section>
 
   <script>
+    const guardiaApps = [
+      { id: 'kraken-user-managment-api', label: 'user-managment-api', scope: 'prod-mngmnt' },
+      { id: 'kraken-role-management-api', label: 'role-management-api', scope: 'prod' },
+      { id: 'kraken-auth-admin-api', label: 'auth-admin-api', scope: 'prod' },
+      { id: 'kraken-auth-core-api', label: 'auth-core-api', scope: 'prod' },
+      { id: 'kraken-application-mgmt-api', label: 'application-mgmt-api', scope: 'prod' },
+      {
+        id: 'kraken-data-aggregator-api',
+        label: 'KDA',
+        scope: 'prod',
+        infra: 'https://web.furycloud.io/engineering/applications/kraken-data-aggregator-api/infrastructure'
+      },
+      { id: 'kraken-authenticated-users-api', label: 'authenticated-users-api', scope: 'prod-read' },
+      { id: 'kraken-audiences-api', label: 'audiences-api', scope: 'prod' },
+      { id: 'kraken-attributes-api-v2', label: 'attributes-api-v2', scope: 'prod' },
+      { id: 'kraken-self-management-api', label: 'KSM', scope: 'prod' },
+      { id: 'shipping-users-mgmt-api', label: 'shipping-users-mgmt-api', scope: 'prod' },
+      { id: 'kraken-menu-management-api', label: 'menu-management-api', scope: 'prod' },
+      { id: 'kraken-menu-api', label: 'menu-api', scope: 'prod' }
+    ];
+
+    const guardiasList = document.getElementById('guardias-apps');
+
+    function createAccessLink(label, url, appLabel){
+      const link = document.createElement('a');
+      link.className = 'access-link link';
+      link.href = url;
+      link.textContent = label;
+      link.setAttribute('aria-label', appLabel + ': ' + label);
+      return link;
+    }
+
+    guardiaApps.forEach(app => {
+      const furyBase = 'https://web.furycloud.io/engineering/applications/' + app.id;
+      const dashboardBase = 'https://app.datadoghq.com/dashboard/88i-mef-g8w';
+      const grafanaBase = 'https://grafana.furycloud.io/d/cei4qvlhweadcdclickhouse';
+      const accessGroups = [
+        [
+          ['Infra', app.infra || 'https://web.furycloud.io/' + app.id + '/infrastructure'],
+          ['Versions', furyBase + '/versions'],
+          ['Deploy', furyBase + '/deployments']
+        ],
+        [
+          ['Configurations', furyBase + '/configuration'],
+          ['Database', furyBase + '/database'],
+          ['Streams', 'https://web.furycloud.io/' + app.id + '/streams'],
+          ['Jobs', furyBase + '/jobs?tab=0'],
+          ['Scopes', furyBase + '/scopes']
+        ],
+        [
+          ['Datadog', dashboardBase + '?tpl_var_application=' + app.id + '&tpl_var_scope=' + app.scope],
+          ['Grafana', grafanaBase + '?var-application=' + app.id + '&var-scope=' + app.scope],
+          ['APM', 'https://app.datadoghq.com/apm/entity/service%3A' + app.id + '?env=' + app.scope + '#traces']
+        ],
+        [
+          ['GitHub', 'https://github.com/melisource/fury_' + app.id + '/pulls']
+        ]
+      ];
+
+      const row = document.createElement('div');
+      row.className = 'guardia-row';
+
+      const appName = document.createElement('div');
+      appName.className = 'app-name';
+      appName.textContent = app.label;
+
+      const links = document.createElement('div');
+      links.className = 'access-links';
+      accessGroups.forEach(accesses => {
+        const group = document.createElement('div');
+        group.className = 'access-group';
+        accesses.forEach(([label, url]) => {
+          group.appendChild(createAccessLink(label, url, app.label));
+        });
+        links.appendChild(group);
+      });
+
+      row.append(appName, links);
+      guardiasList.appendChild(row);
+    });
+
     const tabs = [...document.querySelectorAll('.tab-btn')];
     const panels = [...document.querySelectorAll('.panel')];
 
