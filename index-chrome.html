@@ -48,19 +48,27 @@
     .tabs{
       display:flex; gap:6px; justify-content:flex-end; align-items:center;
     }
-    .tab-btn{
+    .tab-btn,
+    .quick-link{
       appearance:none; border:0; cursor:pointer;
       padding:8px 14px; border-radius:999px;
       background:#ffffffd9; color:#0b0b0b; font-weight:600; font-size:13px;
       box-shadow:0 2px 4px rgba(0,0,0,.2), 0 0 0 1px rgba(0,0,0,.08) inset;
       transition:transform .06s ease, background-color .2s ease;
       display:flex; align-items:center; gap:.5rem;
+      text-decoration:none;
     }
-    .tab-btn:hover{ transform:translateY(-1px); background:#fff; }
+    .tab-btn:hover,
+    .quick-link:hover{ transform:translateY(-1px); background:#fff; }
     .tab-btn[aria-selected="true"]{
       background:var(--pri);
       color:var(--pill);
       box-shadow:0 2px 5px var(--glow);
+    }
+    .quick-separator{
+      color:rgba(255,255,255,.8);
+      font-weight:bold;
+      margin:0 4px;
     }
 
     .panel{ display:none; padding:20px; width:100%; }
@@ -107,26 +115,15 @@
 
     .guardias-container{
       width:100%;
-      max-width:1400px;
+      max-width:none;
       margin:0 auto;
       padding:10px;
     }
-    .guardia-header,
     .guardia-row{
       display:grid;
       grid-template-columns:minmax(220px, 280px) minmax(0, 1fr);
       gap:16px;
       align-items:center;
-    }
-    .guardia-header{
-      margin-bottom:10px;
-      padding:8px 12px;
-      border-radius:6px;
-      background-color:var(--pri);
-      color:var(--pill);
-      font-size:14px;
-      font-weight:bold;
-      box-shadow:0 2px 5px var(--glow);
     }
     .guardias-list{
       display:flex;
@@ -137,7 +134,7 @@
       padding:12px;
       border:1px solid var(--card-bd);
       border-radius:7px;
-      background-color:rgba(255,255,255,.92);
+      background-color:rgba(255,255,255,.65);
       box-shadow:0 2px 4px rgba(10,10,10,.65);
     }
     .app-name{
@@ -148,12 +145,15 @@
     }
     .access-links{
       display:flex;
-      flex-wrap:wrap;
+      flex-wrap:nowrap;
       gap:8px 16px;
+      justify-content:space-between;
+      min-width:0;
+      overflow-x:auto;
     }
     .access-group{
       display:flex;
-      flex-wrap:wrap;
+      flex-wrap:nowrap;
       gap:8px;
       padding-right:16px;
       border-right:1px solid var(--card-bd);
@@ -188,14 +188,19 @@
     @media (max-width:720px){
       header .bar{ align-items:flex-start; }
       .tabs{ gap:4px; }
-      .tab-btn{ font-size:12px; padding:7px 10px; }
+      .tab-btn,
+      .quick-link{ font-size:12px; padding:7px 10px; }
       .column{ min-width:100%; flex:1 1 100%; }
-      .guardia-header{ display:none; }
       .guardia-row{
         grid-template-columns:1fr;
         gap:10px;
       }
-      .access-links{ gap:6px; }
+      .access-links{
+        flex-wrap:wrap;
+        gap:8px 12px;
+        overflow-x:visible;
+      }
+      .access-group{ flex-wrap:wrap; }
       .access-link{ flex:1 1 auto; }
     }
   </style>
@@ -210,8 +215,12 @@
           <span aria-hidden="true">🔗</span><span>Links</span>
         </button>
         <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-guardias" id="tab-guardias">
-          <span aria-hidden="true">📊</span><span>Guardias</span>
+          <span aria-hidden="true">🚨</span><span>Guardias</span>
         </button>
+        <span class="quick-separator" aria-hidden="true">|</span>
+        <a class="quick-link" href="https://mercadolibre-opsgenie.atlassian.net/jira/ops/alerts?view=list&amp;query=status:%20%22open%22" rel="noopener noreferrer">
+          <span aria-hidden="true">🔥</span><span>Jira Alerts</span>
+        </a>
       </div>
     </div>
   </header>
@@ -228,7 +237,7 @@
         <a class="link" href="https://meet.google.com/landing?authuser=0">Google Meet</a>
         <a class="link" href="https://meli.udemy.com/organization/home/">Udemy</a>
         <a class="link" href="https://nasdaq-meli.app.opsgenie.com/alert/list">Opsgenie : Alerts</a>
-        <a class="link" href="https://mercadolibre-opsgenie.atlassian.net/jira/ops/alerts?view=list&query=status:%20%22open%22">Jira : Alerts</a>
+        <a class="link" href="https://app.slack.com/client/E03RFPQL8QN/C016R5R6HL2">Slack : Alerts</a>
         <a class="link" href="https://mercadolibre.atlassian.net/jira/servicedesk/projects/SSHP/queues/custom/1174">Jira : Tickets Groot</a>
         <a class="link" href="https://mercadolibre.atlassian.net/issues/?filter=95286">Jira : Vulns</a>
         <a class="link" href="https://mercadolibre.atlassian.net/jira/software/c/projects/SGP1/boards/6528/backlog">Jira : Backlog</a>
@@ -318,10 +327,6 @@
 
   <section id="panel-guardias" class="panel" role="tabpanel" aria-labelledby="tab-guardias">
     <div class="guardias-container">
-      <div class="guardia-header" aria-hidden="true">
-        <span>Aplicación</span>
-        <span>Accesos</span>
-      </div>
       <div id="guardias-apps" class="guardias-list"></div>
     </div>
   </section>
@@ -340,21 +345,36 @@
         infra: 'https://web.furycloud.io/engineering/applications/kraken-data-aggregator-api/infrastructure'
       },
       { id: 'kraken-authenticated-users-api', label: 'authenticated-users-api', scope: 'prod-read' },
-      { id: 'kraken-audiences-api', label: 'audiences-api', scope: 'prod' },
-      { id: 'kraken-attributes-api-v2', label: 'attributes-api-v2', scope: 'prod' },
       { id: 'kraken-self-management-api', label: 'KSM', scope: 'prod' },
-      { id: 'shipping-users-mgmt-api', label: 'shipping-users-mgmt-api', scope: 'prod' },
       { id: 'kraken-menu-management-api', label: 'menu-management-api', scope: 'prod' },
-      { id: 'kraken-menu-api', label: 'menu-api', scope: 'prod' }
+      { id: 'kraken-menu-api', label: 'menu-api', scope: 'prod' },
+      { id: 'shipping-users-mgmt-api', label: 'shipping-users-mgmt-api', scope: 'prod' },
+      { id: 'kraken-attributes-api-v2', label: 'attributes-api-v2', scope: 'prod' },
+      { id: 'kraken-audiences-api', label: 'audiences-api', scope: 'prod' }
     ];
 
     const guardiasList = document.getElementById('guardias-apps');
+
+    const accessIcons = {
+      Infra: '🖥️',
+      Versions: '🏷️',
+      Deploy: '🚀',
+      Configurations: '⚙️',
+      Database: '🗄️',
+      Streams: '🌊',
+      Jobs: '🛠️',
+      Scopes: '🎯',
+      Datadog: '📈',
+      Grafana: '📊',
+      APM: '🔎',
+      GitHub: '🐙'
+    };
 
     function createAccessLink(label, url, appLabel){
       const link = document.createElement('a');
       link.className = 'access-link link';
       link.href = url;
-      link.textContent = label;
+      link.textContent = accessIcons[label] + ' ' + label;
       link.setAttribute('aria-label', appLabel + ': ' + label);
       return link;
     }
@@ -449,7 +469,7 @@
       const params = new URLSearchParams(window.location.search);
       const openInNewTab = params.get('newTab') !== 'false';
 
-      document.querySelectorAll('a.link').forEach(link => {
+      document.querySelectorAll('a.link, a.quick-link').forEach(link => {
         link.target = openInNewTab ? '_blank' : '_self';
       });
     })();
