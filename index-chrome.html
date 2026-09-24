@@ -177,14 +177,14 @@
     }
 
     .guardias-container{
-      width:100%;
-      max-width:none;
+      width:fit-content;
+      max-width:100%;
       margin:0 auto;
       padding:10px;
     }
     .guardia-row{
       display:grid;
-      grid-template-columns:minmax(220px, 280px) minmax(0, 1fr);
+      grid-template-columns:minmax(220px, 280px) auto;
       gap:16px;
       align-items:center;
     }
@@ -209,8 +209,8 @@
     .access-links{
       display:flex;
       flex-wrap:nowrap;
-      gap:8px 16px;
-      justify-content:space-between;
+      gap:8px;
+      justify-content:space-evenly;
       min-width:0;
       overflow-x:auto;
     }
@@ -218,12 +218,11 @@
       display:flex;
       flex-wrap:nowrap;
       gap:8px;
-      padding-right:16px;
-      border-right:1px solid var(--card-bd);
     }
-    .access-group:last-child{
-      padding-right:0;
-      border-right:0;
+    .access-divider{
+      align-self:center;
+      color:rgba(51,51,51,.45);
+      font-weight:bold;
     }
     .access-link{
       padding:9px 11px;
@@ -261,9 +260,11 @@
       .access-links{
         flex-wrap:wrap;
         gap:8px 12px;
+        justify-content:flex-start;
         overflow-x:visible;
       }
       .access-group{ flex-wrap:wrap; }
+      .access-divider{ display:none; }
       .access-link{ flex:1 1 auto; }
     }
   </style>
@@ -473,7 +474,15 @@
 
       const links = document.createElement('div');
       links.className = 'access-links';
-      accessGroups.forEach(accesses => {
+      accessGroups.forEach((accesses, index) => {
+        if(index > 0){
+          const separator = document.createElement('span');
+          separator.className = 'access-divider';
+          separator.setAttribute('aria-hidden', 'true');
+          separator.textContent = '|';
+          links.appendChild(separator);
+        }
+
         const group = document.createElement('div');
         group.className = 'access-group';
         accesses.forEach(([label, url]) => {
