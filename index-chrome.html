@@ -588,6 +588,10 @@
     const tabs = [...document.querySelectorAll('.tab-btn')];
     const panels = [...document.querySelectorAll('.panel')];
 
+    function focusLinksSearch(){
+      setTimeout(() => linksSearch.focus({ preventScroll:true }), 0);
+    }
+
     function activate(id){
       tabs.forEach(btn=>{
         const selected = btn.id === ('tab-' + id);
@@ -603,6 +607,9 @@
       btn.addEventListener('click', ()=>{
         const id = btn.id.replace('tab-','');
         activate(id);
+        if(id === 'links'){
+          focusLinksSearch();
+        }
       });
       btn.addEventListener('keydown', (e)=>{
         const i = tabs.indexOf(btn);
@@ -619,6 +626,12 @@
     if(tabParams.get('guardias') === 'true'){
       activate('guardias');
     }
+
+    window.addEventListener('load', ()=>{
+      if(tabParams.get('guardias') !== 'true'){
+        focusLinksSearch();
+      }
+    });
   </script>
 
   <script>
