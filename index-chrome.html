@@ -143,6 +143,15 @@
     .links-container .link{
       padding:10px 12px;
     }
+    .split-link-row{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:6px;
+    }
+    .split-link-row .link{
+      min-width:0;
+      padding:10px 6px;
+    }
     .link-group[hidden],
     .link[hidden],
     .links-empty[hidden]{
@@ -198,15 +207,15 @@
     }
 
     .guardias-container{
-      width:fit-content;
+      width:min(100%, 1700px);
       max-width:100%;
       margin:0 auto;
       padding:10px;
     }
     .guardia-row{
       display:grid;
-      grid-template-columns:minmax(220px, 280px) auto;
-      gap:16px;
+      grid-template-columns:minmax(200px, 220px) auto;
+      gap:8px;
       align-items:center;
     }
     .guardias-list{
@@ -246,6 +255,10 @@
       font-weight:bold;
     }
     .access-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      white-space:nowrap;
       padding:9px 11px;
       border:1px solid var(--card-bd);
       border-radius:5px;
@@ -293,6 +306,15 @@
       color:#111;
     }
 
+    @media (max-width:1700px){
+      .access-links{
+        flex-wrap:wrap;
+        justify-content:flex-start;
+        overflow-x:visible;
+      }
+      .access-group{ flex-wrap:wrap; }
+      .access-divider{ display:none; }
+    }
     @media (max-width:1100px){
       header .bar{ max-width:1000px; }
       .container{ gap:14px; }
@@ -366,6 +388,11 @@
           <a class="link" href="https://calendar.google.com/calendar/u/0/r">Google Calendar</a>
           <a class="link" href="https://meet.google.com/landing?authuser=0">Google Meet</a>
           <a class="link" href="https://app.slack.com/client/E03RFPQL8QN/C016R5R6HL2">Slack : Alerts</a>
+          <a class="link" href="https://www.deepl.com/es/translator">DeepL</a>
+          <div class="split-link-row">
+            <a class="link" href="https://translate.google.com.ar/?sl=pt&amp;tl=es&amp;op=translate" aria-label="Traductor portugués a español">🇧🇷 Traductor</a>
+            <a class="link" href="https://translate.google.com.ar/?sl=en&amp;tl=es&amp;op=translate" aria-label="Traductor inglés a español">🇺🇸 Traductor</a>
+          </div>
         </div>
 
         <div class="column link-group">
@@ -377,6 +404,10 @@
           <a class="link" href="https://melihelp.adminml.com/board">Meli Help</a>
           <a class="link" href="https://xtools.adminml.com/tools/profile/mercadoenvios">Mi perfil Groot</a>
           <a class="link" href="https://web.furycloud.io/collaboration/approvals?tab=received-requests">Fury Approvals</a>
+          <a class="link" href="https://performancemanager4.successfactors.com/">Success Factor</a>
+          <a class="link" href="https://beta-learninghub.adminml.com/my-learning">Learning Hub</a>
+          <a class="link" href="https://azir.adminml.com/">Licencias Azir</a>
+          <a class="link" href="https://shield.adminml.com">Shield</a>
         </div>
 
         <div class="column link-group">
@@ -387,10 +418,9 @@
           <a class="link" href="https://xtools.adminml.com/management/rules-contexts">Reglas Contextuales</a>
           <a class="link" href="https://xtools.adminml.com/management/applications">Kraken Applications</a>
           <a class="link" href="https://xtools.adminml.com/tools/teams">Teams</a>
-          <a class="link" href="https://xtools.adminml.com/management/domains?section=my-domains">Domains</a>
+          <a class="link" href="https://xtools.adminml.com/management/domains?section=other-domains">Domains</a>
           <a class="link" href="http://xtools.adminml.com/tools/auth/silos">Silos</a>
-          <a class="link" href="https://xtools.adminml.com/management/attributes">Atributos Management</a>
-          <a class="link" href="https://xtools.adminml.com/tools/attributes">Atributos</a>
+          <a class="link" href="https://xtools.adminml.com/management/attributes?section=1">Atributos</a>
           <a class="link" href="https://xtools.adminml.com/management/roles/biso-pane">BISO Pane</a>
           <a class="link" href="https://envios.adminml.com/tools/rules/roles-incompatibilities">Incomp Roles</a>
           <a class="link" href="https://envios.adminml.com/tools/rules/permission-incompatibilities">Incomp Permisos</a>
@@ -400,7 +430,6 @@
 
         <div class="column link-group">
           <div class="column-title">🛠️ Engineering</div>
-          <a class="link" href="https://web.furycloud.io/engineering/applications/enforcement/before-summary/kraken-client-go">kraken-client-go</a>
           <a class="link" href="https://github.com/melisource/api-rules/blob/master/rules/api.conf">API Rules Routes</a>
           <a class="link" href="https://web.furycloud.io/engineering/traffic?show=domains">Fury Traffic Routes</a>
           <a class="link" href="https://appsec-guardians.adminml.com/guardian/home">Security Guardians</a>
@@ -433,6 +462,7 @@
           <a class="link" href="https://meli-gpt.adminml.com">MELI GPT</a>
           <a class="link" href="https://chatgpt.com">Chat GPT</a>
           <a class="link" href="https://claude.ai/">Claude</a>
+          <a class="link" href="https://genai-analytics-status.adminml.com/coding-usage/?grain=daily&amp;cost=all&amp;category=all">Uso Gen AI Status</a>
         </div>
       </div>
 
@@ -472,12 +502,15 @@
 
     const accessIcons = {
       Infra: '🖥️',
+      Traffic: '🚦',
       Versions: '🏷️',
-      Deploy: '🚀',
-      Configurations: '⚙️',
-      Database: '🗄️',
+      Deploys: '🚀',
+      Configs: '⚙️',
+      DataBase: '🗄️',
       Streams: '🌊',
       Jobs: '🛠️',
+      BQ: '🔷',
+      Vulns: '🛡️',
       Scopes: '🎯',
       Datadog: '📈',
       Grafana: '📊',
@@ -501,14 +534,17 @@
       const accessGroups = [
         [
           ['Infra', app.infra || 'https://web.furycloud.io/' + app.id + '/infrastructure'],
+          ['Traffic', furyBase + '/traffic-authorization/expose'],
           ['Versions', furyBase + '/versions'],
-          ['Deploy', furyBase + '/deployments']
+          ['Vulns', furyBase + '/dependency-catalog-summary'],
+          ['Deploys', furyBase + '/deployments']
         ],
         [
-          ['Configurations', furyBase + '/configuration'],
-          ['Database', furyBase + '/database'],
+          ['Configs', furyBase + '/configuration'],
+          ['DataBase', furyBase + '/database'],
           ['Streams', 'https://web.furycloud.io/' + app.id + '/streams'],
           ['Jobs', furyBase + '/jobs?tab=0'],
+          ['BQ', furyBase + '/bigq'],
           ['Scopes', furyBase + '/scopes']
         ],
         [
