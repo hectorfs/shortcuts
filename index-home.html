@@ -110,6 +110,19 @@
       gap: 14px;
       align-items: start;
     }
+    #link-groups [data-group="Mail y mensajería"] { order: 1; }
+    #link-groups [data-group="Bancos y tarjetas"] { order: 2; }
+    #link-groups [data-group="Inversiones"] { order: 3; }
+    #link-groups [data-group="Inteligencia artificial"] { order: 4; }
+    #link-groups [data-group="Salud y seguros"] { order: 5; }
+    #link-groups [data-group="Trámites y servicios"] { order: 6; }
+    #link-groups [data-group="Clima"] { order: 7; }
+    #link-groups [data-group="Google y productividad"] { order: 8; }
+    #link-groups [data-group="Storage y transferencias"] { order: 9; }
+    #link-groups [data-group="Pagos y dólar"] { order: 10; }
+    #link-groups [data-group="Traductores"] { order: 11; }
+    #link-groups [data-group="Estudio e idiomas"] { order: 12; }
+    #link-groups [data-group="Seguridad y acceso remoto"] { order: 13; }
     .group, .favorites {
       padding: 12px;
       border: 1px solid var(--border);
@@ -157,6 +170,12 @@
     }
     .clear-button:disabled:hover { transform: none; }
     .shortcut-grid { display: grid; gap: 7px; }
+    .google-translator-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 7px;
+    }
+    .google-translator-row.single { grid-template-columns: minmax(0, 1fr); }
     .shortcut {
       display: grid;
       grid-template-columns: minmax(0, 1fr) 34px;
@@ -345,12 +364,50 @@
           <div class="group-header"><h2 class="group-title">✉️ Mail y mensajería</h2></div>
           <div class="shortcut-grid">
             <div class="shortcut" data-id="gmail" data-label="Gmail"><a class="shortcut-link" href="https://mail.google.com/mail/u/0/">Gmail</a></div>
+            <div class="shortcut" data-id="google-calendar" data-label="Google Calendar"><a class="shortcut-link" href="https://calendar.google.com/calendar/u/0/r">Google Calendar</a></div>
             <div class="shortcut" data-id="outlook" data-label="Outlook"><a class="shortcut-link" href="https://outlook.live.com/mail/0/">Outlook</a></div>
+            <div class="shortcut" data-id="outlook-calendar" data-label="Calendario de Outlook"><a class="shortcut-link" href="https://outlook.live.com/calendar/0/view/week">Calendario Outlook</a></div>
             <div class="shortcut" data-id="protonmail" data-label="ProtonMail"><a class="shortcut-link" href="https://mail.proton.me/">ProtonMail</a></div>
             <div class="shortcut" data-id="yahoo" data-label="Yahoo Mail"><a class="shortcut-link" href="https://mail.yahoo.com/">Yahoo Mail</a></div>
             <div class="shortcut" data-id="office365" data-label="Office 365"><a class="shortcut-link" href="https://outlook.office365.com/">Office 365</a></div>
             <div class="shortcut" data-id="whatsapp" data-label="WhatsApp Web"><a class="shortcut-link" href="https://web.whatsapp.com/">WhatsApp Web</a></div>
             <div class="shortcut" data-id="telegram" data-label="Telegram Web"><a class="shortcut-link" href="https://web.telegram.org/">Telegram Web</a></div>
+          </div>
+        </section>
+
+        <section class="group" data-group="Google y productividad">
+          <div class="group-header"><h2 class="group-title">🔎 Google y productividad</h2></div>
+          <div class="shortcut-grid">
+            <div class="shortcut" data-id="google-drive-shared" data-label="Google Drive compartido"><a class="shortcut-link" href="https://drive.google.com/drive/shared-drives">Google Drive compartido</a></div>
+            <div class="shortcut" data-id="google-chat" data-label="Google Chat"><a class="shortcut-link" href="https://mail.google.com/chat/u/0/#chat/home">Google Chat</a></div>
+            <div class="shortcut" data-id="google-meet" data-label="Google Meet"><a class="shortcut-link" href="https://meet.google.com/landing?authuser=0">Google Meet</a></div>
+            <div class="shortcut" data-id="google-docs" data-label="Google Docs"><a class="shortcut-link" href="https://docs.google.com/document">Google Docs</a></div>
+            <div class="shortcut" data-id="google-sheets" data-label="Google Sheets"><a class="shortcut-link" href="https://docs.google.com/spreadsheets">Google Sheets</a></div>
+            <div class="shortcut" data-id="google-slides" data-label="Google Slides"><a class="shortcut-link" href="https://docs.google.com/presentation">Google Slides</a></div>
+            <div class="shortcut" data-id="youtube" data-label="YouTube"><a class="shortcut-link" href="https://www.youtube.com/">YouTube</a></div>
+            <div class="shortcut" data-id="looker-studio" data-label="Looker Studio"><a class="shortcut-link" href="https://lookerstudio.google.com">Looker Studio</a></div>
+            <div class="shortcut" data-id="notebooklm" data-label="NotebookLM"><a class="shortcut-link" href="https://notebooklm.google.com">NotebookLM</a></div>
+            <div class="shortcut" data-id="bigquery-console" data-label="BigQuery Console"><a class="shortcut-link" href="https://console.cloud.google.com/bigquery?project=meli-bi-data&amp;d=SHIPPING_BI">BigQuery Console</a></div>
+          </div>
+        </section>
+
+        <section class="group" data-group="Traductores">
+          <div class="group-header"><h2 class="group-title">🌐 Traductores</h2></div>
+          <div class="shortcut-grid">
+            <div class="google-translator-row">
+              <div class="shortcut" data-id="translate-pt-es" data-label="Traductor portugués a español"><a class="shortcut-link" href="https://translate.google.com.ar/?sl=pt&amp;tl=es&amp;op=translate">🇧🇷 Traductor</a></div>
+              <div class="shortcut" data-id="translate-en-es" data-label="Traductor inglés a español"><a class="shortcut-link" href="https://translate.google.com.ar/?sl=en&amp;tl=es&amp;op=translate">🇺🇸 Traductor</a></div>
+            </div>
+            <div class="shortcut" data-id="deepl" data-label="DeepL"><a class="shortcut-link" href="https://www.deepl.com/es/translator">DeepL</a></div>
+          </div>
+        </section>
+
+        <section class="group" data-group="Inteligencia artificial">
+          <div class="group-header"><h2 class="group-title">🤖 Inteligencia artificial</h2></div>
+          <div class="shortcut-grid">
+            <div class="shortcut" data-id="gemini" data-label="Gemini"><a class="shortcut-link" href="https://gemini.google.com">Gemini</a></div>
+            <div class="shortcut" data-id="chatgpt" data-label="ChatGPT"><a class="shortcut-link" href="https://chatgpt.com">Chat GPT</a></div>
+            <div class="shortcut" data-id="claude" data-label="Claude"><a class="shortcut-link" href="https://claude.ai/">Claude</a></div>
           </div>
         </section>
 
@@ -374,9 +431,10 @@
         <section class="group" data-group="Salud y seguros">
           <div class="group-header"><h2 class="group-title">🩺 Salud y seguros</h2></div>
           <div class="shortcut-grid">
+            <div class="shortcut" data-id="swiss-medical" data-label="Swiss Medical"><a class="shortcut-link" href="https://www.swissmedical.com.ar/prepagaclientes/login">Swiss Medical</a></div>
             <div class="shortcut" data-id="cemedic" data-label="Cemedic"><a class="shortcut-link" href="https://cemedic.com.ar/">Cemedic</a></div>
             <div class="shortcut" data-id="hospital-italiano" data-label="Hospital Italiano"><a class="shortcut-link" href="https://www1.hospitalitaliano.org.ar/PortalWebBeta/#!/login">Hospital Italiano</a></div>
-            <div class="shortcut" data-id="swiss-medical" data-label="Swiss Medical"><a class="shortcut-link" href="https://www.swissmedical.com.ar/prepagaclientes/login">Swiss Medical</a></div>
+            <div class="shortcut" data-id="cemic" data-label="Cemic"><a class="shortcut-link" href="https://www.cemic.edu.ar/">Cemic</a></div>
             <div class="shortcut" data-id="osim" data-label="OSIM"><a class="shortcut-link" href="https://www.osim.com.ar/osim_2016/afiliados_so_credenciales_electronicas.php">OSIM</a></div>
             <div class="shortcut" data-id="mercantil-andina" data-label="Mercantil Andina"><a class="shortcut-link" href="https://servicios.mercantilandina.com.ar/asegurados/">Mercantil Andina</a></div>
             <div class="shortcut" data-id="zurich" data-label="Zurich"><a class="shortcut-link" href="https://www.autogestion.zurich.com.ar/Autogestion/AutoGestion/FrmListaPolizasItems.aspx">Zurich</a></div>
@@ -580,6 +638,11 @@
             const matches = groupMatches || normalize(shortcut.dataset.label).includes(term);
             shortcut.hidden = !matches;
             if (matches) visible += 1;
+          });
+          group.querySelectorAll('.google-translator-row').forEach(row => {
+            const visibleShortcuts = [...row.querySelectorAll('.shortcut')].filter(shortcut => !shortcut.hidden).length;
+            row.hidden = visibleShortcuts === 0;
+            row.classList.toggle('single', visibleShortcuts === 1);
           });
           group.hidden = links.every(shortcut => shortcut.hidden);
         });
